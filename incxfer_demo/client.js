@@ -1,7 +1,23 @@
 (function() {
+  let host = 'https://fonts.gstatic.com';
   let currentFont = null;
   let fontInfos = null;
-  let host = 'https://fonts.gstatic.com';
+  let elements = {
+    metrics : function() { return document.getElementById('metric_container'); },
+    demo_text : function() { return document.getElementById('demo_text'); },
+    add_container : function() { return document.getElementById('add_container'); },
+    add_samples : function() { return document.getElementById('add_samples'); },
+    add_arbitrary : function() { return document.getElementById('add_arbitrary'); },
+    arbitrary : function() { return document.getElementById('arbitrary'); },
+    font_spec : function() { return document.getElementById('font_spec'); },
+    face_holder : function() { return document.getElementById('face_holder'); }
+  };
+
+  function log(str) {
+    let d = new Date();
+    console.log(`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()} `
+                + str);
+  }
 
   function div() {
     return document.createElement('div');
@@ -23,12 +39,6 @@
     el.insertBefore(newDiv, el.firstChild);
   }
 
-  function log(str) {
-    let d = new Date();
-    console.log(`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()} `
-                + str);
-  }
-
   function createFontInfo(font_size, woff2_size, patch_size, codepoint_size,
                           gf_subsets) {
     return {
@@ -41,7 +51,7 @@
   }
 
   function appendSizeSeq(suffix_fn, max_sz, seq) {
-    let container = document.getElementById('metric_container');
+    let container = elements.metrics();
     let metrics = div();
     metrics.className = 'metrics';
     seq.forEach((byte_size) => {
@@ -59,7 +69,7 @@
 
   function addFontInfo(fontInfo) {
     fontInfos.push(fontInfo);
-    let container = document.getElementById('metric_container');
+    let container = elements.metrics();
     removeAllChildren(container);
 
     let cp_desc = div();
@@ -108,14 +118,14 @@
   function addDemoText(str) {
     if (!!!str) return;
     log('Add "' + str + '"');
-    let demo_text = document.getElementById('demo_text');
-    let add_container = document.getElementById('add_container');
+    let demo_text = elements.demo_text();
+    let add_container = elements.add_container();
     let cp_current = codepoints(demo_text.innerText);
     prepend(add_container, str);
     let cp_needed = codepoints(demo_text.innerText);
     cp_current.forEach(c => cp_needed.delete(c));
     if (cp_needed.size > 0) {
-      beginUpdateFont(document.getElementById('font_spec').value, cp_current, cp_needed);
+      beginUpdateFont(elements.font_spec().value, cp_current, cp_needed);
     } else {
       log('nop, same cps');
     }
@@ -140,10 +150,8 @@
         font-family: "IncXFer";\
         src: url(\'' + fontDataUrl + '\');\
       }\n');
-    let faceStyle = document.getElementById('face_holder');
-    while (faceStyle.hasChildNodes()) {
-      faceStyle.removeChild(faceStyle.firstChild);
-    }
+    let faceStyle = elements.face_holder();
+    removeAllChildren(faceStyle);
     faceStyle.appendChild(face);
   }
 
@@ -230,15 +238,16 @@
   function fullReset() {
     currentFont = null;
     fontInfos = [];
-    removeAllChildren(document.getElementById('metric_container'));
-    removeAllChildren(document.getElementById('add_container'));
+    removeAllChildren(elements.metrics());
+    removeAllChildren(elements.add_container());
 
-    beginUpdateFont(document.getElementById('font_spec').value, new Set(),
-      codepoints(document.getElementById('demo_text').innerText))
+    beginUpdateFont(elements.font_spec().value, new Set(),
+      codepoints(elements.demo_text().innerText))
   }
 
-  window.addEventListener('DOMContentLoaded', function() {
-    let samples = {
+  /* taken from Google Fonts sample strings */
+  function sampleStrings() {
+    return {
       'Add Latin 1': 'HARFBUZZ FTW',
       'Add Latin 2': 'I used to be a coder like you until I took an ARROW in the KNEE!',
       'Add Latin 3': 'All their equipment and instruments are alive.',
@@ -250,8 +259,11 @@
       'Add Japanese 1': '各部位を正確に作るには時間がかかるので、当初の意図とは異なるが、巨大な人体を作ることにした。高さは約 8 フィートで、これに釣り合う体格だ。これを決断し、数か月にわたって材料を集め整理した後、作業を開始した。',
       'Add Japanese 2': '5 平方フィート程度の紫色の草むらのようなものが、砂地を横切ってこちらに向かってきた。近くから見ると草ではないようだった。葉はなく紫色の根だけがある。その根が回転し、小さな草の集まりがそれぞれ縁のない車輪のようだった。'
     };
+  }
 
-    sample_container = document.getElementById('add_samples');
+  window.addEventListener('DOMContentLoaded', function() {
+    sample_container = elements.add_samples();
+    let samples = sampleStrings();
     for (label in samples) {
       let sample = samples[label];
       btn = document.createElement('button');
@@ -260,11 +272,11 @@
       sample_container.appendChild(btn);
     }
 
-    document.getElementById('add_arbitrary')
-      .addEventListener('click', function() { addDemoText(document.getElementById('arbitrary').value); });
+    elements.add_arbitrary().addEventListener('click', 
+      function() { addDemoText(elements.arbitrary().value);
+    });
 
-    document.getElementById('font_spec')
-      .addEventListener('change', fullReset);
+    elements.font_spec().addEventListener('change', fullReset);
 
     fullReset();
   });
