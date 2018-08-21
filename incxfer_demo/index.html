@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700);
+
+
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 1em;
+  }
+
+  h1 {
+    font-size: 3em;
+    font-weight: 200;
+  }
+  h2 {
+    font-size: 2em;
+    font-weight: 300;
+  }
+
+  label {
+    margin-right: 0.5em;
+  }
+
+  #demo_text {
+    font-family: 'IncXFer';
+    font-size: 1.25em;
+    width: 100%;
+    // Prevent https://www.chromestatus.com/feature/5636954674692096
+    font-display: block;
+    color: #757575;
+  }
+
+  button {
+    margin-top: .25em;
+    margin-right: .25em;
+    padding: 0.25em;
+  }
+
+  textarea {
+    display: block;
+  }
+  .wide {
+    width: 100%;
+  }
+
+  .metrics {
+    width: 100%;
+  }
+
+  .metrics div {
+    padding: 0.2em;
+    box-sizing: border-box;
+    display: inline-block;
+    background: #519657;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 0.2em;
+  }
+
+  .metric:nth-child(even) {
+    background: #81c784;
+  }
+
+  .transfer_options {
+    font-weight: bold;
+  }
+  </style>
+  <style id="face_holder"></style>
+  <script src="./client.js"></script>
+</head>
+<body>
+  <h1>Incremental Transfer Demo</h1>
+  <p>
+  Proof of concept implementation of an incremental transfer system using HarfBuzz subsetting
+  (hb-subset) combined with a well-known patch algorithm. State is entirely transient; refresh
+  to reset. We do lots of woefully inefficient things; demonstrating speed is NOT the point.
+
+  <p>
+  Note that for CJK the display of Google Fonts subsets is wrong as it does not yet take into
+  account our new method of segmentation based on character usage.
+  <h2>Transfer Configuration</h2>
+  <div>
+    <label for="font_spec">Font:</label>
+    <select id="font_spec">
+      <option>M PLUS 1p:400</option>
+      <option>Montserrat:400</option>
+      <option selected>Lobster:400</option>
+      <option>Playfair Display:400</option>
+    </select>
+  </div>
+  <div>
+    <label for="difftype">Patch format: </label>
+    <input type="radio" name="difftype" value="VCDIFF_NO_LZMA" id="xdelta_nolz">
+    <label for="xdelta_nolz">XDelta3/VCDIFF (no secondary)</label>
+    <input type="radio" name="difftype" value="VCDIFF_LZMA" id="xdelta_lz">
+    <label for="xdelta_lz">XDelta3/VCDIFF (secondary LZMA)</label>
+    <input type="radio" name="difftype" value="BROTLI_SHARED_DICT_MAX" id="sbr11" checked="checked">
+    <label for="sbr11">Brotli Shared Dictionary (quality 11[max])</label>
+    <input type="radio" name="difftype" value="BROTLI_SHARED_DICT_Q9" id="sbr9">
+    <label for="sbr9">Brotli Shared Dictionary (quality 9)</label>
+  </div>
+  <div>
+    Coming soon: Brotli Patch Mode.
+  </div>
+
+  <h2>Add Text Content</h2>
+  <div>
+    <textarea id="arbitrary" class="wide" rows="5" placeholder="Enter text to add to demo content. Use new codepoints to trigger a delta transfer.">
+
+    </textarea>
+    <input id="add_arbitrary" type="button" value="Add Text">
+  </div>
+  <div id="add_samples">
+
+  </div>
+  <h2>Transfer Options</h2>
+  <div id="metric_container">
+  </div>
+
+  <h2>Demo Content</h2>
+  <div id="demo_text">
+    <div id="add_container"></div>
+    <div>
+      Apparently we had reached a great height in the atmosphere, for the sky was a
+      dead black, and the stars had ceased to twinkle. By the same illusion which lifts
+      the horizon of the sea to the level of the spectator on a hillside, the sable cloud
+      beneath was dished out, and the car seemed to float in the middle of an immense
+      dark sphere, whose upper half was strewn with silver.
+    </div>
+  </div>
+</body>
+</html>
