@@ -36,8 +36,15 @@
       for (api_level in summary) {
         info = summary[api_level]
         if (!!!info['emoji_support'].length) continue;
+        
+        info_str = `${info.name} (${info.version}, api ${api_level})\n`
+        info.emoji_support.forEach((e) => {
+          info_str += '  ';
+          info_str += JSON.stringify(e);
+          info_str += '\n';
+        });
         pre = document.createElement('pre');
-        pre.innerText = JSON.stringify(info);
+        pre.innerText = info_str
         document.body.appendChild(pre);
       }
     })
