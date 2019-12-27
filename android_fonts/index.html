@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  @import url(//fonts.googleapis.com/css?family=Inconsolata:400,700);
+  body {
+    font-family: 'Inconsolata', sans-serif;
+    margin: 1em;
+  }
+  h1 {
+    font-size: 3em;
+  }
+  </style>
+  <script>
+  function log(str) {
+    let d = new Date();
+    console.log(`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()} `
+                + str);
+  }
+
+  function requestJson(path, method='GET') {
+    let url = path;
+    let req = new XMLHttpRequest();
+    req.responseType = 'json';
+    req.open(method, url, true);
+    log(method + ' ' + url);
+    return req;
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    let req = requestJson('emoji_summary.json')
+    req.addEventListener('load', (e) => { 
+      log(`${req.responseURL} ${e.type}: ${e.loaded} bytes transferred\n`);
+      summary = req.response
+
+      for (api_level in summary) {
+        info = summary[api_level]
+        if (!!!info['emoji_support'].length) continue;
+        pre = document.createElement('pre');
+        pre.innerText = JSON.stringify(info);
+        document.body.appendChild(pre);
+      }
+    })
+    req.send();
+  });
+  </script>
+</head>
+<body>
+  <h1>Android Font Support</h1>
+
+</body>
+</html>

@@ -1,0 +1,376 @@
+{
+  "1": {
+    "name": "(no codename)",
+    "version": "1.0",
+    "emoji_support": []
+  },
+  "2": {
+    "name": "(no codename)",
+    "version": "1.1",
+    "emoji_support": []
+  },
+  "3": {
+    "name": "Cupcake",
+    "version": "1.5 ",
+    "emoji_support": []
+  },
+  "4": {
+    "name": "Donut",
+    "version": "1.6 ",
+    "emoji_support": []
+  },
+  "5": {
+    "name": "Eclair",
+    "version": "2.0",
+    "emoji_support": []
+  },
+  "6": {
+    "name": "Eclair",
+    "version": "2.0.1",
+    "emoji_support": []
+  },
+  "7": {
+    "name": "Eclair",
+    "version": "2.1 ",
+    "emoji_support": []
+  },
+  "8": {
+    "name": "Froyo",
+    "version": "2.2.x ",
+    "emoji_support": []
+  },
+  "9": {
+    "name": "Gingerbread",
+    "version": "2.3 - 2.3.2 ",
+    "emoji_support": []
+  },
+  "10": {
+    "name": "Gingerbread",
+    "version": "2.3.3 - 2.3.7",
+    "emoji_support": []
+  },
+  "11": {
+    "name": "Honeycomb",
+    "version": "3.0",
+    "emoji_support": []
+  },
+  "12": {
+    "name": "Honeycomb",
+    "version": "3.1 ",
+    "emoji_support": []
+  },
+  "13": {
+    "name": "Honeycomb",
+    "version": "3.2.x",
+    "emoji_support": []
+  },
+  "14": {
+    "name": "Ice Cream Sandwich",
+    "version": "4.0.1 - 4.0.2 ",
+    "emoji_support": []
+  },
+  "15": {
+    "name": "Ice Cream Sandwich",
+    "version": "4.0.3 - 4.0.4 ",
+    "emoji_support": []
+  },
+  "16": {
+    "name": "Jelly Bean",
+    "version": "4.1.x",
+    "emoji_support": []
+  },
+  "17": {
+    "name": "Jelly Bean",
+    "version": "4.2.x",
+    "emoji_support": []
+  },
+  "18": {
+    "name": "Jelly Bean",
+    "version": "4.3.x",
+    "emoji_support": []
+  },
+  "19": {
+    "name": "KitKat",
+    "version": "4.4 - 4.4.4",
+    "emoji_support": []
+  },
+  "21": {
+    "name": "Lollipop",
+    "version": "5.0",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 1090,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 29,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 0,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 0,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 0,
+        "total": 186
+      }
+    ]
+  },
+  "22": {
+    "name": "Lollipop",
+    "version": "5.1",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 1090,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 29,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 0,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 0,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 0,
+        "total": 186
+      }
+    ]
+  },
+  "23": {
+    "name": "Marshmallow",
+    "version": "6.0",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 1160,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 74,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 0,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 0,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 0,
+        "total": 186
+      }
+    ]
+  },
+  "24": {
+    "name": "Nougat",
+    "version": "7.0",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 2027,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 216,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 7,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 55,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 20,
+        "total": 186
+      }
+    ]
+  },
+  "25": {
+    "name": "Nougat",
+    "version": "7.1",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 2822,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 219,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 7,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 55,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 20,
+        "total": 186
+      }
+    ]
+  },
+  "26": {
+    "name": "Oreo",
+    "version": "8.0.0",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 2822,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 555,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 7,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 71,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 144,
+        "total": 186
+      }
+    ]
+  },
+  "27": {
+    "name": "Oreo",
+    "version": "8.1.0",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 2822,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 555,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 7,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 71,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 144,
+        "total": 186
+      }
+    ]
+  },
+  "28": {
+    "name": "Pie 9",
+    "version": "9",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 2822,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 555,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 193,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 71,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 168,
+        "total": 186
+      }
+    ]
+  },
+  "29": {
+    "name": "Android10",
+    "version": "10",
+    "emoji_support": [
+      {
+        "emoji_level": 4.0,
+        "supported": 2822,
+        "total": 2822
+      },
+      {
+        "emoji_level": 5.0,
+        "supported": 555,
+        "total": 555
+      },
+      {
+        "emoji_level": 11.0,
+        "supported": 193,
+        "total": 193
+      },
+      {
+        "emoji_level": 12.0,
+        "supported": 266,
+        "total": 266
+      },
+      {
+        "emoji_level": 12.1,
+        "supported": 186,
+        "total": 186
+      }
+    ]
+  }
+}
