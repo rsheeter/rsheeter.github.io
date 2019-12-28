@@ -2,102 +2,142 @@
   "1": {
     "name": "(no codename)",
     "version": "1.0",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "2": {
     "name": "(no codename)",
     "version": "1.1",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "3": {
     "name": "Cupcake",
     "version": "1.5 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "4": {
     "name": "Donut",
     "version": "1.6 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "5": {
     "name": "Eclair",
     "version": "2.0",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "6": {
     "name": "Eclair",
     "version": "2.0.1",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "7": {
     "name": "Eclair",
     "version": "2.1 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "8": {
     "name": "Froyo",
     "version": "2.2.x ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "9": {
     "name": "Gingerbread",
     "version": "2.3 - 2.3.2 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "10": {
     "name": "Gingerbread",
     "version": "2.3.3 - 2.3.7",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "11": {
     "name": "Honeycomb",
     "version": "3.0",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "12": {
     "name": "Honeycomb",
     "version": "3.1 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "13": {
     "name": "Honeycomb",
     "version": "3.2.x",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "14": {
     "name": "Ice Cream Sandwich",
     "version": "4.0.1 - 4.0.2 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "15": {
     "name": "Ice Cream Sandwich",
     "version": "4.0.3 - 4.0.4 ",
-    "emoji_support": []
+    "fonts": null,
+    "emoji": []
   },
   "16": {
     "name": "Jelly Bean",
     "version": "4.1.x",
-    "emoji_support": []
+    "fonts": {
+      "num_files": 35,
+      "size_MB": 10.9868812561,
+      "delta_size_MB": null
+    },
+    "emoji": []
   },
   "17": {
     "name": "Jelly Bean",
     "version": "4.2.x",
-    "emoji_support": []
+    "fonts": {
+      "num_files": 37,
+      "size_MB": 10.3325653076,
+      "delta_size_MB": -0.6543159485
+    },
+    "emoji": []
   },
   "18": {
     "name": "Jelly Bean",
     "version": "4.3.x",
-    "emoji_support": []
+    "fonts": {
+      "num_files": 37,
+      "size_MB": 10.8554229736,
+      "delta_size_MB": 0.522857666
+    },
+    "emoji": []
   },
   "19": {
     "name": "KitKat",
     "version": "4.4 - 4.4.4",
-    "emoji_support": []
+    "fonts": {
+      "num_files": 33,
+      "size_MB": 10.2163734436,
+      "delta_size_MB": -0.63904953
+    },
+    "emoji": []
   },
   "21": {
     "name": "Lollipop",
     "version": "5.0",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 91,
+      "size_MB": 18.6652946472,
+      "delta_size_MB": 8.4489212036
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 1090,
@@ -128,7 +168,12 @@
   "22": {
     "name": "Lollipop",
     "version": "5.1",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 91,
+      "size_MB": 18.6731491089,
+      "delta_size_MB": 0.0078544617
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 1090,
@@ -159,7 +204,12 @@
   "23": {
     "name": "Marshmallow",
     "version": "6.0",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 144,
+      "size_MB": 31.3863983154,
+      "delta_size_MB": 12.7132492065
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 1160,
@@ -190,7 +240,12 @@
   "24": {
     "name": "Nougat",
     "version": "7.0",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 140,
+      "size_MB": 35.4215393066,
+      "delta_size_MB": 4.0351409912
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 2027,
@@ -221,7 +276,12 @@
   "25": {
     "name": "Nougat",
     "version": "7.1",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 140,
+      "size_MB": 37.7320785522,
+      "delta_size_MB": 2.3105392456
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 2822,
@@ -252,7 +312,12 @@
   "26": {
     "name": "Oreo",
     "version": "8.0.0",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 171,
+      "size_MB": 40.9870033264,
+      "delta_size_MB": 3.2549247742
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 2822,
@@ -283,7 +348,12 @@
   "27": {
     "name": "Oreo",
     "version": "8.1.0",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 173,
+      "size_MB": 41.5915870667,
+      "delta_size_MB": 0.6045837402
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 2822,
@@ -312,9 +382,14 @@
     ]
   },
   "28": {
-    "name": "Pie 9",
+    "name": "Pie",
     "version": "9",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 234,
+      "size_MB": 68.5562973022,
+      "delta_size_MB": 26.9647102356
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 2822,
@@ -345,7 +420,12 @@
   "29": {
     "name": "Android10",
     "version": "10",
-    "emoji_support": [
+    "fonts": {
+      "num_files": 252,
+      "size_MB": 73.4981613159,
+      "delta_size_MB": 4.9418640137
+    },
+    "emoji": [
       {
         "emoji_level": 4.0,
         "supported": 2822,
