@@ -3,91 +3,151 @@
     "name": "(no codename)",
     "version": "1.0",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "2": {
     "name": "(no codename)",
     "version": "1.1",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "3": {
     "name": "Cupcake",
     "version": "1.5 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "4": {
     "name": "Donut",
     "version": "1.6 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "5": {
     "name": "Eclair",
     "version": "2.0",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "6": {
     "name": "Eclair",
     "version": "2.0.1",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "7": {
     "name": "Eclair",
     "version": "2.1 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "8": {
     "name": "Froyo",
     "version": "2.2.x ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "9": {
     "name": "Gingerbread",
     "version": "2.3 - 2.3.2 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "10": {
     "name": "Gingerbread",
     "version": "2.3.3 - 2.3.7",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "11": {
     "name": "Honeycomb",
     "version": "3.0",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "12": {
     "name": "Honeycomb",
     "version": "3.1 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "13": {
     "name": "Honeycomb",
     "version": "3.2.x",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "14": {
     "name": "Ice Cream Sandwich",
     "version": "4.0.1 - 4.0.2 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "15": {
     "name": "Ice Cream Sandwich",
     "version": "4.0.3 - 4.0.4 ",
     "fonts": null,
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "16": {
     "name": "Jelly Bean",
@@ -97,7 +157,11 @@
       "size_MB": 10.9868812561,
       "delta_size_MB": null
     },
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "17": {
     "name": "Jelly Bean",
@@ -107,7 +171,11 @@
       "size_MB": 10.3325653076,
       "delta_size_MB": -0.6543159485
     },
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "18": {
     "name": "Jelly Bean",
@@ -117,7 +185,11 @@
       "size_MB": 10.8554229736,
       "delta_size_MB": 0.522857666
     },
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "19": {
     "name": "KitKat",
@@ -127,7 +199,11 @@
       "size_MB": 10.2163734436,
       "delta_size_MB": -0.63904953
     },
-    "emoji": []
+    "emoji": {
+      "delta": 0,
+      "supported": 0,
+      "by_level": []
+    }
   },
   "21": {
     "name": "Lollipop",
@@ -137,33 +213,37 @@
       "size_MB": 18.6652946472,
       "delta_size_MB": 8.4489212036
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 1090,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 29,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 0,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 0,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 0,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 0.0,
+      "supported": 1119.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 1090,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 29,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 186
+        }
+      ]
+    }
   },
   "22": {
     "name": "Lollipop",
@@ -173,33 +253,37 @@
       "size_MB": 18.6731491089,
       "delta_size_MB": 0.0078544617
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 1090,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 29,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 0,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 0,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 0,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 0.0,
+      "supported": 1119.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 1090,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 29,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 186
+        }
+      ]
+    }
   },
   "23": {
     "name": "Marshmallow",
@@ -209,33 +293,37 @@
       "size_MB": 31.3863983154,
       "delta_size_MB": 12.7132492065
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 1160,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 74,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 0,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 0,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 0,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 115.0,
+      "supported": 1234.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 1160,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 74,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 186
+        }
+      ]
+    }
   },
   "24": {
     "name": "Nougat",
@@ -245,33 +333,37 @@
       "size_MB": 35.4215393066,
       "delta_size_MB": 4.0351409912
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 2027,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 216,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 7,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 55,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 20,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 1091.0,
+      "supported": 2325.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 2027,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 216,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 7,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 55,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 20,
+          "total": 186
+        }
+      ]
+    }
   },
   "25": {
     "name": "Nougat",
@@ -281,33 +373,37 @@
       "size_MB": 37.7320785522,
       "delta_size_MB": 2.3105392456
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 2822,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 219,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 7,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 55,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 20,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 798.0,
+      "supported": 3123.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 2822,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 219,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 7,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 55,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 20,
+          "total": 186
+        }
+      ]
+    }
   },
   "26": {
     "name": "Oreo",
@@ -317,33 +413,37 @@
       "size_MB": 40.9870033264,
       "delta_size_MB": 3.2549247742
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 2822,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 555,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 7,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 71,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 144,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 476.0,
+      "supported": 3599.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 2822,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 555,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 7,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 71,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 144,
+          "total": 186
+        }
+      ]
+    }
   },
   "27": {
     "name": "Oreo",
@@ -353,33 +453,37 @@
       "size_MB": 41.5915870667,
       "delta_size_MB": 0.6045837402
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 2822,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 555,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 7,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 71,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 144,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 0.0,
+      "supported": 3599.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 2822,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 555,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 7,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 71,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 144,
+          "total": 186
+        }
+      ]
+    }
   },
   "28": {
     "name": "Pie",
@@ -389,33 +493,37 @@
       "size_MB": 68.5562973022,
       "delta_size_MB": 26.9647102356
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 2822,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 555,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 193,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 71,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 168,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 210.0,
+      "supported": 3809.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 2822,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 555,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 193,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 71,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 168,
+          "total": 186
+        }
+      ]
+    }
   },
   "29": {
     "name": "Android10",
@@ -425,32 +533,36 @@
       "size_MB": 73.4981613159,
       "delta_size_MB": 4.9418640137
     },
-    "emoji": [
-      {
-        "emoji_level": 4.0,
-        "supported": 2822,
-        "total": 2822
-      },
-      {
-        "emoji_level": 5.0,
-        "supported": 555,
-        "total": 555
-      },
-      {
-        "emoji_level": 11.0,
-        "supported": 193,
-        "total": 193
-      },
-      {
-        "emoji_level": 12.0,
-        "supported": 266,
-        "total": 266
-      },
-      {
-        "emoji_level": 12.1,
-        "supported": 186,
-        "total": 186
-      }
-    ]
+    "emoji": {
+      "delta": 213.0,
+      "supported": 4022.0,
+      "by_level": [
+        {
+          "emoji_level": 4.0,
+          "supported": 2822,
+          "total": 2822
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 555,
+          "total": 555
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 193,
+          "total": 193
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 266,
+          "total": 266
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 186,
+          "total": 186
+        }
+      ]
+    }
   }
 }

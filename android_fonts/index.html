@@ -51,25 +51,31 @@
         <h2 class="header">
           {{api_level.name}} ({{api_level.version}})
         </h2>
+
         <div class="font-summary">
           <h3>Fonts</h3>
           <div class="labels">
             <div>
-              {{api_level.fonts.size_MB | size_mb}}
-              ({{api_level.fonts.delta_size_MB | size_mb | delta}})
+              {{api_level.fonts.size_MB | fixed1}} MB
+              ({{api_level.fonts.delta_size_MB | fixed1 | delta}} MB)
             </div>
             <div>{{api_level.fonts.num_files}} files</div>
           </div>
         </div>
+
         <div class="emoji-summary">
           <h3>Emoji Support</h3>
           <div class="labels">
-            <div v-for="emoji in api_level.emoji">
-              E{{emoji.emoji_level}}:
+            <div>
+              {{api_level.emoji.supported}} sequences
+              ({{api_level.emoji.delta | delta}})
+            </div>
+            <div v-for="emoji in api_level.emoji.by_level">
+              Emoji {{emoji.emoji_level | fixed1}}:
             </div>
           </div>
           <div class="labels">
-            <div v-for="emoji in api_level.emoji">
+            <div v-for="emoji in api_level.emoji.by_level">
               {{emoji.supported}} / {{emoji.total}}
             </div>
           </div>
@@ -105,25 +111,25 @@
         .then((resp) => resp.json())
         .then((summary) => {
           api_levels = [];
-
           for (api_level in summary) {
             info = summary[api_level];
-            if (!!!info.emoji.length) continue;
+            if (!info.emoji.supported) continue;
             info.api_level = api_level;
             api_levels.push(info);
           }
+          log(`Info available for ${api_levels.length} levels`)
           this.api_levels = api_levels;
         })
         .catch(err);
     },
     filters: {
-      size_mb: function (value) {
-        return value.toFixed(1) + " MB";
-      },
       delta: function(value) {
         value = value.toString();
         return value.startsWith('-') ? '' : '+'
           + value;
+      },
+      fixed1: function(value) {
+        return value.toFixed(1);
       }
     }
   });
