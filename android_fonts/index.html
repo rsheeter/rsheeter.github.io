@@ -10,6 +10,11 @@
   h1 {
     font-size: 2em;
   }
+  .card {
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: #F0F0F0;
+  }
   .apk-level {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -18,10 +23,6 @@
       "header header"
       "font-summary emoji-summary"
     ;
-
-    margin-bottom: 1em;
-    padding: 1em;
-    background-color: #F0F0F0;
   }
   .header {
     grid-area: header;
@@ -46,8 +47,15 @@
 <body>
   <div id="app">
     <h1>Android Font Support</h1>
+    <div class="card">
+      <h2>Font Size History</h2>
+      <div>
+        <img src="size_total.png"/>
+        <img src="size_change.png"/>
+      </div>
+    </div>
     <template v-for="api_level in api_levels">
-      <div class="apk-level">
+      <div class="apk-level card">
         <h2 class="header">
           {{api_level.name}} ({{api_level.version}})
         </h2>
@@ -56,8 +64,8 @@
           <h3>Fonts</h3>
           <div class="labels">
             <div>
-              {{api_level.fonts.size_MB | fixed1}} MB
-              ({{api_level.fonts.delta_size_MB | fixed1 | delta}} MB)
+              {{api_level.fonts.size_MB | fixed(1)}} MB
+              ({{api_level.fonts.delta_size_MB | delta(1)}} MB)
             </div>
             <div>{{api_level.fonts.num_files}} files</div>
           </div>
@@ -65,13 +73,13 @@
 
         <div class="emoji-summary">
           <h3>Emoji Support</h3>
-          <div class="labels">
+          <div v-if="api_level.emoji.supported > 0" class="labels">
             <div>
               {{api_level.emoji.supported}} sequences
-              ({{api_level.emoji.delta | delta}})
+              ({{api_level.emoji.delta | delta(0)}})
             </div>
             <div v-for="emoji in api_level.emoji.by_level">
-              Emoji {{emoji.emoji_level | fixed1}}:
+              Emoji {{emoji.emoji_level | fixed(1)}}:
             </div>
           </div>
           <div class="labels">
@@ -113,7 +121,7 @@
           api_levels = [];
           for (api_level in summary) {
             info = summary[api_level];
-            if (!info.emoji.supported) continue;
+            if (info.emoji.supported == 0) continue;
             info.api_level = api_level;
             api_levels.push(info);
           }
@@ -123,13 +131,17 @@
         .catch(err);
     },
     filters: {
-      delta: function(value) {
-        value = value.toString();
-        return value.startsWith('-') ? '' : '+'
-          + value;
+      delta: function(value, fix) {
+        if (value == null) {
+          value = 0;
+        }
+        return (value >= 0 ? '+' : '') + value.toFixed(fix);
       },
-      fixed1: function(value) {
-        return value.toFixed(1);
+      fixed: function(value, fix) {
+        if (value == null) {
+          value = 0;
+        }
+        return value.toFixed(fix);
       }
     }
   });
