@@ -158,9 +158,50 @@
       "delta_size_MB": null
     },
     "emoji": {
-      "delta": 0,
-      "supported": 0,
-      "by_level": []
+      "delta": 0.0,
+      "supported": 638.0,
+      "by_level": [
+        {
+          "emoji_level": 1.0,
+          "supported": 638,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 0,
+          "total": 179
+        },
+        {
+          "emoji_level": 4.0,
+          "supported": 0,
+          "total": 608
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 0,
+          "total": 239
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 157
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 230
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 168
+        }
+      ]
     }
   },
   "17": {
@@ -172,9 +213,50 @@
       "delta_size_MB": -0.6543159485
     },
     "emoji": {
-      "delta": 0,
-      "supported": 0,
-      "by_level": []
+      "delta": 0.0,
+      "supported": 638.0,
+      "by_level": [
+        {
+          "emoji_level": 1.0,
+          "supported": 638,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 0,
+          "total": 179
+        },
+        {
+          "emoji_level": 4.0,
+          "supported": 0,
+          "total": 608
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 0,
+          "total": 239
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 157
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 230
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 168
+        }
+      ]
     }
   },
   "18": {
@@ -186,9 +268,50 @@
       "delta_size_MB": 0.522857666
     },
     "emoji": {
-      "delta": 0,
-      "supported": 0,
-      "by_level": []
+      "delta": 0.0,
+      "supported": 638.0,
+      "by_level": [
+        {
+          "emoji_level": 1.0,
+          "supported": 638,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 0,
+          "total": 179
+        },
+        {
+          "emoji_level": 4.0,
+          "supported": 0,
+          "total": 608
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 0,
+          "total": 239
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 157
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 230
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 168
+        }
+      ]
     }
   },
   "19": {
@@ -200,9 +323,50 @@
       "delta_size_MB": -0.63904953
     },
     "emoji": {
-      "delta": 0,
-      "supported": 0,
-      "by_level": []
+      "delta": -619.0,
+      "supported": 19.0,
+      "by_level": [
+        {
+          "emoji_level": 1.0,
+          "supported": 19,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 0,
+          "total": 179
+        },
+        {
+          "emoji_level": 4.0,
+          "supported": 0,
+          "total": 608
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 0,
+          "total": 239
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 0,
+          "total": 157
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 0,
+          "total": 230
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 0,
+          "total": 168
+        }
+      ]
     }
   },
   "21": {
@@ -214,33 +378,48 @@
       "delta_size_MB": 8.4489212036
     },
     "emoji": {
-      "delta": 0.0,
-      "supported": 1119.0,
+      "delta": 779.0,
+      "supported": 798.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 787,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 11,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 1090,
-          "total": 2822
+          "supported": 0,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 29,
-          "total": 555
+          "supported": 0,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
           "supported": 0,
-          "total": 193
+          "total": 157
         },
         {
           "emoji_level": 12.0,
           "supported": 0,
-          "total": 266
+          "total": 230
         },
         {
           "emoji_level": 12.1,
           "supported": 0,
-          "total": 186
+          "total": 168
         }
       ]
     }
@@ -255,32 +434,47 @@
     },
     "emoji": {
       "delta": 0.0,
-      "supported": 1119.0,
+      "supported": 798.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 787,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 11,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 1090,
-          "total": 2822
+          "supported": 0,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 29,
-          "total": 555
+          "supported": 0,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
           "supported": 0,
-          "total": 193
+          "total": 157
         },
         {
           "emoji_level": 12.0,
           "supported": 0,
-          "total": 266
+          "total": 230
         },
         {
           "emoji_level": 12.1,
           "supported": 0,
-          "total": 186
+          "total": 168
         }
       ]
     }
@@ -294,33 +488,48 @@
       "delta_size_MB": 12.7132492065
     },
     "emoji": {
-      "delta": 115.0,
-      "supported": 1234.0,
+      "delta": 266.0,
+      "supported": 1064.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1053,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 0,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 11,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 1160,
-          "total": 2822
+          "supported": 0,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 74,
-          "total": 555
+          "supported": 0,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
           "supported": 0,
-          "total": 193
+          "total": 157
         },
         {
           "emoji_level": 12.0,
           "supported": 0,
-          "total": 266
+          "total": 230
         },
         {
           "emoji_level": 12.1,
           "supported": 0,
-          "total": 186
+          "total": 168
         }
       ]
     }
@@ -334,33 +543,48 @@
       "delta_size_MB": 4.0351409912
     },
     "emoji": {
-      "delta": 1091.0,
-      "supported": 2325.0,
+      "delta": 723.0,
+      "supported": 1787.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 2027,
-          "total": 2822
+          "supported": 1,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 216,
-          "total": 555
+          "supported": 0,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
-          "supported": 7,
-          "total": 193
+          "supported": 0,
+          "total": 157
         },
         {
           "emoji_level": 12.0,
-          "supported": 55,
-          "total": 266
+          "supported": 0,
+          "total": 230
         },
         {
           "emoji_level": 12.1,
-          "supported": 20,
-          "total": 186
+          "supported": 0,
+          "total": 168
         }
       ]
     }
@@ -374,33 +598,48 @@
       "delta_size_MB": 2.3105392456
     },
     "emoji": {
-      "delta": 798.0,
-      "supported": 3123.0,
+      "delta": 572.0,
+      "supported": 2359.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 2822,
-          "total": 2822
+          "supported": 573,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 219,
-          "total": 555
+          "supported": 0,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
-          "supported": 7,
-          "total": 193
+          "supported": 0,
+          "total": 157
         },
         {
           "emoji_level": 12.0,
-          "supported": 55,
-          "total": 266
+          "supported": 0,
+          "total": 230
         },
         {
           "emoji_level": 12.1,
-          "supported": 20,
-          "total": 186
+          "supported": 0,
+          "total": 168
         }
       ]
     }
@@ -414,33 +653,48 @@
       "delta_size_MB": 3.2549247742
     },
     "emoji": {
-      "delta": 476.0,
-      "supported": 3599.0,
+      "delta": 274.0,
+      "supported": 2633.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 2822,
-          "total": 2822
+          "supported": 608,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 555,
-          "total": 555
+          "supported": 239,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
-          "supported": 7,
-          "total": 193
+          "supported": 0,
+          "total": 157
         },
         {
           "emoji_level": 12.0,
-          "supported": 71,
-          "total": 266
+          "supported": 0,
+          "total": 230
         },
         {
           "emoji_level": 12.1,
-          "supported": 144,
-          "total": 186
+          "supported": 0,
+          "total": 168
         }
       ]
     }
@@ -455,32 +709,47 @@
     },
     "emoji": {
       "delta": 0.0,
-      "supported": 3599.0,
+      "supported": 2633.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 2822,
-          "total": 2822
+          "supported": 608,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 555,
-          "total": 555
+          "supported": 239,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
-          "supported": 7,
-          "total": 193
+          "supported": 0,
+          "total": 157
         },
         {
           "emoji_level": 12.0,
-          "supported": 71,
-          "total": 266
+          "supported": 0,
+          "total": 230
         },
         {
           "emoji_level": 12.1,
-          "supported": 144,
-          "total": 186
+          "supported": 0,
+          "total": 168
         }
       ]
     }
@@ -494,33 +763,48 @@
       "delta_size_MB": 26.9647102356
     },
     "emoji": {
-      "delta": 210.0,
-      "supported": 3809.0,
+      "delta": 157.0,
+      "supported": 2790.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 2822,
-          "total": 2822
+          "supported": 608,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 555,
-          "total": 555
+          "supported": 239,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
-          "supported": 193,
-          "total": 193
+          "supported": 157,
+          "total": 157
         },
         {
           "emoji_level": 12.0,
-          "supported": 71,
-          "total": 266
+          "supported": 0,
+          "total": 230
         },
         {
           "emoji_level": 12.1,
-          "supported": 168,
-          "total": 186
+          "supported": 0,
+          "total": 168
         }
       ]
     }
@@ -534,33 +818,48 @@
       "delta_size_MB": 4.9418640137
     },
     "emoji": {
-      "delta": 213.0,
-      "supported": 4022.0,
+      "delta": 230.0,
+      "supported": 3020.0,
       "by_level": [
         {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
           "emoji_level": 4.0,
-          "supported": 2822,
-          "total": 2822
+          "supported": 608,
+          "total": 608
         },
         {
           "emoji_level": 5.0,
-          "supported": 555,
-          "total": 555
+          "supported": 239,
+          "total": 239
         },
         {
           "emoji_level": 11.0,
-          "supported": 193,
-          "total": 193
+          "supported": 157,
+          "total": 157
         },
         {
           "emoji_level": 12.0,
-          "supported": 266,
-          "total": 266
+          "supported": 230,
+          "total": 230
         },
         {
           "emoji_level": 12.1,
-          "supported": 186,
-          "total": 186
+          "supported": 0,
+          "total": 168
         }
       ]
     }
