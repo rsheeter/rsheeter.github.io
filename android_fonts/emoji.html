@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  @import url(//fonts.googleapis.com/css?family=Inconsolata:400,700|Adobe+Blank);
+  body {
+    font-family: 'Inconsolata', sans-serif;
+    margin: 1em;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  .search {
+    width: 80%;
+  }
+  #search_input {
+    width: 80%;
+  }
+
+  .emoji {
+    font-size: 3em;
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Android Fonts</h1>
+    <div>
+      <a href="/">History</a>
+      |
+      Emoji
+    </div>
+    <div class="header">
+      <input type="search" required="" name="s" id="search_input"
+             placeholder="Search, e.g. u:263A emoji:10 api:22..28 note:&quot;wrestler&quot;"
+             value="">
+    </div>
+    <div v-if="all.length > 0">
+      {{ all.length }} codepoint sequences.
+      {{ matches.length }} matches.
+    </div>
+    <div v-for="match in matches">
+      <template v-for="api_level in visible_apis">
+        <span v-if="isin(api_level, match.api_support)"
+              v-bind:class="emoji_css_class(api_level, match.api_support)"
+              v-html="emoji_html(match.codepoints)"></span>
+        <span v-else
+              class="emoji"
+              v-html="emoji_missing_html()"/>
+      </template>
+      {{ match.notes }}
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+  <script>
+    let vm = emojiVue();
+    (function() {
+      let search = document.getElementById('search_input');
+      search.addEventListener('input', queueEmojiSearch)
+
+      search.value = new URLSearchParams(window.location.search).get('q');
+      let inputEvent = new Event('input');
+      search.dispatchEvent(inputEvent);
+    })();
+  </script>
+</body>
+</html>

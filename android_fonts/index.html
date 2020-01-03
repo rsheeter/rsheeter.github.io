@@ -38,15 +38,16 @@
     width: auto;
   }
   </style>
-  <!-- development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <!-- production version, optimized for size and speed 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  -->
 </head>
 <body>
   <div id="app">
-    <h1>Android Font Support</h1>
+    <h1>Android Fonts : History</h1>
+    <div>
+      History
+      | 
+      <a href="/emoji.html">Emoji</a>
+    </div>
     <div class="card">
       <h2>Font Size History</h2>
       <div>
@@ -75,7 +76,7 @@
           <h3>Emoji</h3>
           <div v-if="api_level.emoji.supported > 0" class="labels">
             <div>
-              {{api_level.emoji.supported}} sequences
+              <a v-bind:href="emoji_url('api:' + api_level.api_level)">{{api_level.emoji.supported}} sequences</a>
               ({{api_level.emoji.delta | delta(0)}})
             </div>
             <div v-for="emoji in api_level.emoji.by_level">
@@ -92,59 +93,9 @@
     </template>
   </div>
 
+  <script src="scripts.js"></script>
   <script>
-  function _log(logfn, str) {
-    let d = new Date();
-    logfn(`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()} `
-          + str);
-  };
-
-  function log(str) {
-    _log(console.log, str);
-  };
-
-  function err(str) {
-    _log(console.error, str);
-  };
-
-  let vm = new Vue({
-    el: '#app',
-    data () {
-      return {
-        api_levels: null,
-      }
-    },
-    mounted() {
-      fetch('emoji_summary.json')
-        .then((resp) => resp.json())
-        .then((summary) => {
-          api_levels = [];
-          for (api_level in summary) {
-            info = summary[api_level];
-            if (info.emoji.supported == 0) continue;
-            info.api_level = api_level;
-            api_levels.push(info);
-          }
-          log(`Info available for ${api_levels.length} levels`)
-          this.api_levels = api_levels;
-        })
-        .catch(err);
-    },
-    filters: {
-      delta: function(value, fix) {
-        if (value == null) {
-          value = 0;
-        }
-        return (value >= 0 ? '+' : '') + value.toFixed(fix);
-      },
-      fixed: function(value, fix) {
-        if (value == null) {
-          value = 0;
-        }
-        return value.toFixed(fix);
-      }
-    }
-  });
+    let vm = indexVue();
   </script>
 </body>
 </html>
