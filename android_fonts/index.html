@@ -58,7 +58,8 @@
     <template v-for="api_level in api_levels">
       <div class="apk-level card">
         <h2 class="header">
-          {{api_level.name}} ({{api_level.version}})
+          {{api_level.name}}
+          ({{api_level.version}}, API {{api_level.api_level}})
         </h2>
 
         <div class="font-summary">
@@ -77,7 +78,7 @@
           <div v-if="api_level.emoji.supported > 0" class="labels">
             <div>
               <a v-bind:href="emoji_url('api:' + api_level.api_level)">{{api_level.emoji.supported}} sequences</a>
-              ({{api_level.emoji.delta | delta(0)}})
+              (<a v-bind:href="emoji_url('api_added:' + api_level.api_level)">{{api_level.emoji.delta | delta(0)}}</a>)
             </div>
             <div v-for="emoji in api_level.emoji.by_level">
               Emoji {{emoji.emoji_level | fixed(1)}}:

@@ -1,3 +1,5 @@
+Vue.config.performance = true;
+
 function _log(logfn, str) {
   let d = new Date();
   logfn(`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()} `
@@ -64,18 +66,21 @@ function emojiVue() {
       return {
         all: [],
         matches: [],
+        match_len: 0,
         min_api: 99,
         min_font_api: 21,
         max_api: 0,
         visible_apis: [],
+        max_rows: 1024,  // grid seems super slow with lots of rows
       }
     },
     mounted() {
       fetch('emoji_detail.json')
         .then((resp) => resp.json())
         .then((seqs) => {
-          log(`Info available for ${seqs.length} seqs`)
-          this.all = seqs;
+          log(`Info available for ${seqs.length} seqs`);
+
+          this.all = Object.freeze(seqs);
           this.all.forEach(s => s.api_support.forEach(api => {
             this.min_api = Math.min(api, this.min_api);
             this.max_api = Math.max(api, this.max_api);
@@ -101,26 +106,29 @@ function emojiVue() {
           }
           document.head.appendChild(style);
         });
-    },
+    }, // end mounted
     methods: {
-      isin: function(value, sequence) {
-        return sequence.indexOf(value) != -1;
+      emoji_css_class: function(emoji, api_level) {
+        cssClass = 'emoji';
+        if (emoji.api_support.indexOf(api_level) != -1) {
+          cssClass += ` emoji${api_level}`;
+        }
+        return cssClass;
       },
-      emoji_css_class: function(api_level, api_support) {
-        return `emoji emoji${api_level}`;
+      emoji_html: function(emoji, api_level) {
+        if (emoji.api_support.indexOf(api_level) == -1) {
+          return "";
+        }
+        return emoji.codepoints
+                    .map(cp => '&#x' + cp.toString(16) + ';')
+                    .join('');
       },
-      emoji_html: function(codepoints) {
-        return codepoints.map(cp => '&#x' + cp.toString(16) + ';')
-                         .join('');
-      },
-      emoji_missing_html: function() {
-        return "";
-      },
-      codepoint_html: function(codepoints) {
-        return codepoints.map(cp => 'U+' + cp.toString(16) + '')
-                         .join(' ');
+      codepoint_html: function(emoji) {
+        return emoji.codepoints
+                    .map(cp => 'U+' + cp.toString(16) + '')
+                    .join(' ');
       }
-    }
+    } // end methods
   });
 }
 
@@ -161,6 +169,11 @@ function makeFilter(type, raw_value) {
     }
     pred = (s) => s.indexOf(raw_value) != -1;
     break;
+  case 'api_added':
+    field = 'api_support';
+    value_pred = numericFilter(parseInt, raw_value, 10);
+    pred = (seq) => value_pred(seq[0]);
+    break;
   default:
     console.log(`Poorly formed ${type}:${raw_value}`)
     field = '_';
@@ -174,6 +187,8 @@ function inclusiveRange(min, max) {
 }
 
 function doEmojiSearch(query) {
+  const startTime = Date.now();
+
   // clear the active search ref, we're doing it now
   activeSearch = null;
 
@@ -192,24 +207,32 @@ function doEmojiSearch(query) {
   let api_filters = filters.filter(f => f.field == 'api_support');
   vm.visible_apis = inclusiveRange(vm.min_api, vm.max_api)
     .filter(api => api_filters.every(f => f.pred([api])));
-  console.log(`APIs visible: ${vm.visible_apis}`);
 
   // Build styles for display of the new results
   rowStyle = '#results {\n'
            + '  display: grid;\n'
            + '  grid-gap: 0.1em;\n'
-           + `  grid-template-columns: repeat(${vm.visible_apis.length}, 4em) 1fr 20%;\n`
+           + `  grid-template-columns: repeat(${vm.visible_apis.length}, 4em)`
+           + ' minmax(4em, 1fr)' // codepoints column
+           + ' minmax(6em, 3fr)' // notes column
+           + ';\n'
            + '}\n'
            ;
   dynStyles.appendChild(document.createTextNode(rowStyle));
 
-  // push to Vue, triggering UI refresh
-  vm.matches = vm.all
-    .filter(rec => filters.every(f => f.pred(rec[f.field])));
+  // update Vue, triggering UI refresh
+  // limit max rows because grid was insanely slow with large set
+  let matches = vm.all
+                  .filter(emoji => filters.every(f => f.pred(emoji[f.field])));
+  vm.match_len = matches.length;
+  vm.matches = Object.freeze(matches.slice(0, vm.max_rows));
 
   if (new URLSearchParams(window.location.search).get('q') !== query) {
     history.pushState(query, "Android Emoji", `?q=${query}`);
   }
+
+  const endTime = Date.now();
+  log(`doEmojiSearch took ${(endTime - startTime)} ms ${query} has ${vm.matches.length} results`)
 }
 
 var activeSearch = null;

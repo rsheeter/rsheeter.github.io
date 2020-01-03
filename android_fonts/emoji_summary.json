@@ -159,11 +159,11 @@
     },
     "emoji": {
       "delta": 0.0,
-      "supported": 638.0,
+      "supported": 631.0,
       "by_level": [
         {
           "emoji_level": 1.0,
-          "supported": 638,
+          "supported": 631,
           "total": 1264
         },
         {
@@ -214,11 +214,11 @@
     },
     "emoji": {
       "delta": 0.0,
-      "supported": 638.0,
+      "supported": 631.0,
       "by_level": [
         {
           "emoji_level": 1.0,
-          "supported": 638,
+          "supported": 631,
           "total": 1264
         },
         {
@@ -269,11 +269,11 @@
     },
     "emoji": {
       "delta": 0.0,
-      "supported": 638.0,
+      "supported": 631.0,
       "by_level": [
         {
           "emoji_level": 1.0,
-          "supported": 638,
+          "supported": 631,
           "total": 1264
         },
         {
@@ -323,7 +323,7 @@
       "delta_size_MB": -0.63904953
     },
     "emoji": {
-      "delta": -619.0,
+      "delta": -612.0,
       "supported": 19.0,
       "by_level": [
         {
@@ -378,12 +378,12 @@
       "delta_size_MB": 8.4489212036
     },
     "emoji": {
-      "delta": 779.0,
-      "supported": 798.0,
+      "delta": 772.0,
+      "supported": 791.0,
       "by_level": [
         {
           "emoji_level": 1.0,
-          "supported": 787,
+          "supported": 780,
           "total": 1264
         },
         {
@@ -434,11 +434,11 @@
     },
     "emoji": {
       "delta": 0.0,
-      "supported": 798.0,
+      "supported": 791.0,
       "by_level": [
         {
           "emoji_level": 1.0,
-          "supported": 787,
+          "supported": 780,
           "total": 1264
         },
         {
@@ -488,7 +488,7 @@
       "delta_size_MB": 12.7132492065
     },
     "emoji": {
-      "delta": 266.0,
+      "delta": 273.0,
       "supported": 1064.0,
       "by_level": [
         {

@@ -49,7 +49,10 @@
              value="">
     </div>
     <div v-if="all.length > 0">
-      {{ matches.length }} / {{ all.length }} sequences match.
+      {{ match_len }} / {{ all.length }} sequences match.
+      <span v-if="match_len > matches.length">
+        Showing first {{ matches.length }}.
+      </span>
     </div>
     <div id="results"
          v-if="matches.length > 0">
@@ -69,18 +72,15 @@
 
       <template v-for="match in matches">
         <template v-for="api_level in visible_apis">
-          <span v-if="isin(api_level, match.api_support)"
-                v-bind:class="emoji_css_class(api_level, match.api_support)"
-                v-html="emoji_html(match.codepoints)"></span>
-          <span v-else
-                class="emoji"
-                v-html="emoji_missing_html()"/>
+          <span v-bind:class="emoji_css_class(match, api_level)"
+                v-html="emoji_html(match, api_level)"/>
         </template>
-        <span v-html="codepoint_html(match.codepoints)"></span>
+        <span v-html="codepoint_html(match)"></span>
         <span>
           {{ match.notes }}
         </span>
       </template>
+
     </div>
   </div>
 
