@@ -26,15 +26,27 @@ function indexVue() {
       fetch('emoji_summary.json')
         .then((resp) => resp.json())
         .then((summary) => {
-          api_levels = [];
+          const ordered_levels = [];
           for (api_level in summary) {
+            ordered_levels.push(api_level);
+          }
+          ordered_levels.sort();
+
+          api_levels = [];
+          ordered_levels.forEach(api_level => {
             info = summary[api_level];
-            if (info.emoji.supported == 0) continue;
+            if (info.emoji.supported == 0) return;
             info.api_level = api_level;
             api_levels.push(info);
-          }
-          log(`Info available for ${api_levels.length} levels`)
+          });
+          log(`Info available for ${api_levels.length} levels`);
+
           this.api_levels = api_levels;
+
+          // Set delta to all of them for the earliest API we know about
+          const earliest = api_levels[0]['emoji'];
+          earliest.delta = earliest.supported;
+
         });
     },
     filters: {
