@@ -112,7 +112,7 @@ function emojiVue() {
 
               cssClass = `.emoji${api} { font-family: "NotoColorEmoji.${api}", "Adobe Blank" }\n`;
             } else {
-              cssClass = `.emoji${api} { font-family: "Adobe Blank" }\n`;
+              cssClass = `.emoji${api} { width: 100%; height: 100%; }\n`;
             }
             style.appendChild(document.createTextNode(cssClass));
           }
@@ -131,9 +131,19 @@ function emojiVue() {
         if (emoji.api_support.indexOf(api_level) == -1) {
           return "";
         }
-        return emoji.codepoints
-                    .map(cp => '&#x' + cp.toString(16) + ';')
-                    .join('');
+        if (api_level >= vm.min_font_api) {
+          return emoji.codepoints
+                      .map(cp => '&#x' + cp.toString(16) + ';')
+                      .join('');
+        }
+        // supported but no font, there should be an image
+        return '<img src="./api_level/'
+              + api_level.toString() 
+              + '/emoji_u'
+              +  emoji.codepoints
+                      .map(cp => cp.toString(16).padStart(4, '0'))
+                      .join('_')
+              + '.svg"></img>';
       },
       codepoint_html: function(emoji) {
         return emoji.codepoints
@@ -218,7 +228,8 @@ function doEmojiSearch(query) {
   // Start displaying all apis then prune
   let api_filters = filters.filter(f => f.field == 'api_support');
   vm.visible_apis = inclusiveRange(vm.min_api, vm.max_api)
-    .filter(api => api_filters.every(f => f.pred([api])));
+    .filter(api => api_filters.every(f => f.pred([api])))
+    .filter(api => api != 20);  // 20 doesn't exist
 
   // Build styles for display of the new results
   rowStyle = '#results {\n'
