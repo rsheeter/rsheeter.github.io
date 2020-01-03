@@ -10,17 +10,29 @@
   h1 {
     font-size: 2em;
   }
-  .search {
-    width: 80%;
-  }
   #search_input {
-    width: 80%;
+    width: 100%;
+    font-size: 1.5em;
   }
 
   .emoji {
     font-size: 3em;
   }
+
+  #head_api_level {
+    grid-column: 1/-3;
+  }
+  .rowhead {
+    padding: 0.2em;
+  }
+  .rowhead:nth-child(even) {
+    background-color: #F0F0F0;
+  }
+  .rowhead:nth-child(odd) {
+    background-color: #D8D8D8;
+  }
   </style>
+  <style id="dynamic_styles"></style>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
@@ -32,24 +44,43 @@
       Emoji
     </div>
     <div class="header">
-      <input type="search" required="" name="s" id="search_input"
+      <input type="text" required="" name="s" id="search_input"
              placeholder="Search, e.g. u:263A emoji:10 api:22..28 note:&quot;wrestler&quot;"
              value="">
     </div>
     <div v-if="all.length > 0">
-      {{ all.length }} codepoint sequences.
-      {{ matches.length }} matches.
+      {{ matches.length }} / {{ all.length }} sequences match.
     </div>
-    <div v-for="match in matches">
-      <template v-for="api_level in visible_apis">
-        <span v-if="isin(api_level, match.api_support)"
-              v-bind:class="emoji_css_class(api_level, match.api_support)"
-              v-html="emoji_html(match.codepoints)"></span>
-        <span v-else
-              class="emoji"
-              v-html="emoji_missing_html()"/>
+    <div id="results"
+         v-if="matches.length > 0">
+      <template>
+        <span class="rowhead" id="head_api_level">Android API Level</span>
+        <span class="rowhead">Codepoints</span>
+        <span class="rowhead">Notes</span>
       </template>
-      {{ match.notes }}
+      
+      <template v-for="api_level in visible_apis">
+        <span>{{ api_level }}</span>
+      </template>
+      <template>
+        <span></span>
+        <span></span>
+      </template>
+
+      <template v-for="match in matches">
+        <template v-for="api_level in visible_apis">
+          <span v-if="isin(api_level, match.api_support)"
+                v-bind:class="emoji_css_class(api_level, match.api_support)"
+                v-html="emoji_html(match.codepoints)"></span>
+          <span v-else
+                class="emoji"
+                v-html="emoji_missing_html()"/>
+        </template>
+        <span v-html="codepoint_html(match.codepoints)"></span>
+        <span>
+          {{ match.notes }}
+        </span>
+      </template>
     </div>
   </div>
 

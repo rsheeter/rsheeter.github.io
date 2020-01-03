@@ -114,7 +114,11 @@ function emojiVue() {
                          .join('');
       },
       emoji_missing_html: function() {
-        return "D";
+        return "";
+      },
+      codepoint_html: function(codepoints) {
+        return codepoints.map(cp => 'U+' + cp.toString(16) + '')
+                         .join(' ');
       }
     }
   });
@@ -170,8 +174,18 @@ function inclusiveRange(min, max) {
 }
 
 function doEmojiSearch(query) {
+  // clear the active search ref, we're doing it now
   activeSearch = null;
-  let validFilters = [...query.matchAll(/(\w+):((?:"[^"]*")|(?:[^\s]+))/)];
+
+  // clear current results
+  vm.matches = []
+  let dynStyles = document.getElementById('dynamic_styles');
+  while (dynStyles.hasChildNodes()) {
+    dynStyles.removeChild(dynStyles.firstChild);
+  }
+
+  // Just bash it with a regex, no need to be fancy
+  let validFilters = [...query.matchAll(/(\w+):((?:"[^"]*")|(?:[^\s]+))/g)];
   let filters = validFilters.map(t => makeFilter(t[1], t[2]));
 
   // Start displaying all apis then prune
@@ -180,6 +194,16 @@ function doEmojiSearch(query) {
     .filter(api => api_filters.every(f => f.pred([api])));
   console.log(`APIs visible: ${vm.visible_apis}`);
 
+  // Build styles for display of the new results
+  rowStyle = '#results {\n'
+           + '  display: grid;\n'
+           + '  grid-gap: 0.1em;\n'
+           + `  grid-template-columns: repeat(${vm.visible_apis.length}, 4em) 1fr 20%;\n`
+           + '}\n'
+           ;
+  dynStyles.appendChild(document.createTextNode(rowStyle));
+
+  // push to Vue, triggering UI refresh
   vm.matches = vm.all
     .filter(rec => filters.every(f => f.pred(rec[f.field])));
 
