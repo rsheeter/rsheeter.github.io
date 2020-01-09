@@ -10,7 +10,8 @@ working on Google Fonts.
     1.  [TTFont](#ttfont), a Python class to read/write OpenType fonts
     1.  [pyftsubset](#pyftsubset), a tool to subset and optimize OpenType fonts
 1.  [OpenType Fonts](#opentype-fonts), the dominant modern font format
-
+1.  [Drawing Text](#drawing-text), actually putting something on the screen
+    1.  [hb-shape](#hb-shape), shape a run of text
 
 ## Basic Work Environment
 
@@ -181,4 +182,59 @@ You should see something like:
   </cmap>
 
 </ttFont>
+```
+
+## Drawing Text
+
+Once our font is looking good we might want to render text with it. A full text rendering stack is typically a collection of components. We'll look primarily at the open options:
+
+1.  Shaping: given a sequence of character codes, figure out what gids should be drawn at what positions
+    *  The leading open tool for shaping is HarfBuzz ([code](https://github.com/harfbuzz/harfbuzz), [documentation](harfbuzz.github.io)
+    *  HarfBuzz [definition](https://harfbuzz.github.io/what-is-harfbuzz.html#what-is-text-shaping) of shaping
+    *  If this is your first encounter with shaping beware, it's WAY more complicated than it might sound
+    *  [What HarfBuzz doesn't do](https://harfbuzz.github.io/what-harfbuzz-doesnt-do.html)
+1.  Justification
+    *  Splitting text into lines of similar length, avoiding excessive whitespace
+    *  [Minikin](https://android.googlesource.com/platform/frameworks/minikin/) works with HarfBuzz to do this on Android
+    *  Text Justification [lecture](https://youtu.be/ENyox7kNKeY?t=1025)
+1.  Rendering
+    *  Actually putting pixels onto the screen.
+    *  [Skia](https://skia.org/) is a leading open 2d graphics library.
+
+    
+See also [A Tour of Android Typography](https://www.youtube.com/watch?v=L8LD0BM-Vjk).
+
+### Building HarfBuzz
+
+See https://harfbuzz.github.io/building.html
+
+### hb-shape
+
+Let's shape some text using the HarfBuzz
+[hb-shape](https://harfbuzz.github.io/utilities.html#utilities-command-line-hbshape) tool. The examples assume harfbuzz is cloned and compiled at `./harfbuzz` and a clone of `https://github.com/google/fonts` exists at `./fonts`.
+
+```shell
+harfbuzz/util/hb-shape --help
+harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC"
+[gid37=0+1336|gid38=1+1275|gid39=2+1333]
+
+# ...What?
+harfbuzz/util/hb-shape --help-output-syntax
+
+# OK, I just want gid and advance
+harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC" --no-glyph-names --no-clusters
+[37+1336|38+1275|39+1333]
+```
+
+TODO: complex script example, mention layout
+
+Hopefully this illustrates that hb-shape runs on a single run of characters in a single font and tells you what gids to use and how to lay them out. You still need something else to actually DO that, but HarfBuzz has done a LOT of the hard work for you.
+
+### hb-view
+
+[hb-view](https://harfbuzz.github.io/utilities.html#utilities-command-line-hbview) lets you shape and render a string. For example:
+
+```shell
+harfbuzz/util/hb-view fonts/apache/roboto/Roboto-Regular.ttf "ABC" --output-file=/tmp/roboto-abc.png
+display /tmp/roboto-abc.png
 ```
