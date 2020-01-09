@@ -12,6 +12,7 @@ working on Google Fonts.
 1.  [OpenType Fonts](#opentype-fonts), the dominant modern font format
 1.  [Drawing Text](#drawing-text), actually putting something on the screen
     1.  [hb-shape](#hb-shape), shape a run of text
+    1.  [hb-view](#hb-view), render a run of text using a font
 
 ## Basic Work Environment
 
