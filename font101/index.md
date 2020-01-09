@@ -4,6 +4,11 @@ A brief introduction to the basic concepts and tools you might need if you are
 a software engineer who wants to Do Things to fonts. Primarily aimed at people
 working on Google Fonts.
 
+1.  [Basic Work Environment](#basic-work-environment)
+1.  [FontTools](#fonttools), a library for inspection and manipulation of OpenType fonts
+    1.  [TTX](#ttx), a commandline tool to convert fonts to/from xml
+    1.  [TTFont](#ttfont), a Python class to read/write OpenType fonts
+
 
 ## Basic Work Environment
 
@@ -60,11 +65,23 @@ ttx -o - -t fvar fonts/ofl/mavenpro/MavenPro\[wght\].ttf
 ### TTFont
 
 [TTFont](https://github.com/fonttools/fonttools/blob/master/Lib/fontTools/ttLib/ttFont.py) is a Python class that can 
-read/write OpenType font files.
+read/write OpenType font files. For example, let's suppose we decided Roboto-Regular.ttf had the wrong metadata for weight and we want to fix [usWeightClass](https://docs.microsoft.com/en-us/typography/opentype/spec/os2#usweightclass) programmatically:
 
 ```shell
 # clone https://github.com/google/fonts, assumed to be in ./fonts for this example
 python
 >>> from fontTools import ttLib
 >>> font = ttLib.TTFont('fonts/apache/roboto/Roboto-Regular.ttf')
+>>> font['OS/2'].usWeightClass
+400
+>>> font['OS/2'].usWeightClass = 500
+>>> font.save('/tmp/Roboto-Modified.ttf')
+# Ctrl+D to exit python repl
+```
+
+We could confirm our edit with TTX:
+
+```shell
+ttx -q -o - -t "OS/2" /tmp/Roboto-Modified.ttf | grep usWeight
+    <usWeightClass value="400"/>
 ```
