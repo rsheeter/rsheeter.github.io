@@ -64,6 +64,8 @@ To see what axes and named instances a variable font supports we could dump ['fv
 ttx -o - -t fvar fonts/ofl/mavenpro/MavenPro\[wght\].ttf
 ```
 
+See also FontTools explanation of TTX [here](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
+
 ### TTFont
 
 [TTFont](https://github.com/fonttools/fonttools/blob/master/Lib/fontTools/ttLib/ttFont.py) is a Python class that can 
