@@ -39,7 +39,7 @@ pip install -e fonttools/
 
 TTX is an xml representation of a binary font. FontTools can transform to/from TTX, meaning you can make changes to a font binary by converting it to TTX, editing the XML, and converting it back again. 
 
-The examples assume a clone https://github.com/google/fonts in ./fonts.
+The examples assume a clone of `https://github.com/google/fonts` exists in `./fonts`.
 
 Let's try it out with a Google Font:
 
