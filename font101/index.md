@@ -120,9 +120,9 @@ pyftsubset fonts/apache/roboto/Roboto-Regular.ttf \
   --output-file=/tmp/Roboto-Regular-Cyrillic.ttf
 ```
 
-The original file is, at time of writing, 168KB. The cyrillic subset is 24KB.
-
 You can also use pyftsubset to drop hints, remove unwanted layout features, etc.
+
+The original file is, at time of writing, 168KB. The cyrillic subset is 24KB. By default pyftsubset performs a number of optimizations that remove parts of the font unlikely to be needed for web usage. If you want to remove characters and keep everything else you have to opt out of this. See `--help`.
 
 ## OpenType Fonts
 
@@ -183,6 +183,18 @@ You should see something like:
   </cmap>
 
 </ttFont>
+```
+
+If you are manipulating a font with FontTools it will try to give you the glyphs by name as glyph order. Let's take a look at `/tmp/Roboto-Regular-ABC.ttf` (generated with `pyftsubset` above):
+
+```shell
+python
+>>> from fontTools import ttLib
+>>> font = ttLib.TTFont('/tmp/Roboto-Regular-ABC.ttf')
+>>> font.getGlyphOrder()
+['.notdef', 'A', 'B', 'C']
+>>> [font.getGlyphID(name) for name in font.getGlyphOrder()]
+[0, 1, 2, 3]
 ```
 
 ## Drawing Text
