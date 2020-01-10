@@ -36,7 +36,7 @@ I assume you want to be able to mess with the source, and that you have an activ
 ```shell
 git clone git@github.com:fonttools/fonttools.git
 cd fonttools
-pip install -e fonttools/
+pip install -e .
 ```
 
 ### TTX
