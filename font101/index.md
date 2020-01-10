@@ -10,6 +10,7 @@ working on Google Fonts.
     1.  [TTFont](#ttfont), a Python class to read/write OpenType fonts
     1.  [pyftsubset](#pyftsubset), a tool to subset and optimize OpenType fonts
 1.  [OpenType Fonts](#opentype-fonts), the dominant modern font format
+    1.  [Glyph IDs and 'cmap'](#glyph-ids-and-the-cmap-table), overview of how Unicode codepoints map to things you can draw
 1.  [Drawing Text](#drawing-text), actually putting something on the screen
     1.  [hb-shape](#hb-shape), shape a run of text
     1.  [hb-view](#hb-view), render a run of text using a font
@@ -154,6 +155,23 @@ codes (Unicode or otherwise) to gids. Let's look at an example by subsetting Rob
 pyftsubset fonts/apache/roboto/Roboto-Regular.ttf \
   --text="ABC" \
   --output-file=/tmp/Roboto-Regular-ABC.ttf
+```
+
+FontTools tries to give you the glyphs by name as well as gid. For example, using our subset Roboto:
+
+```shell
+python
+>>> from fontTools import ttLib
+>>> font = ttLib.TTFont('/tmp/Roboto-Regular-ABC.ttf')
+>>> font.getGlyphOrder()
+['.notdef', 'A', 'B', 'C']
+>>> [font.getGlyphID(name) for name in font.getGlyphOrder()]
+[0, 1, 2, 3]
+```
+
+We can also see the this in the TTX output:
+
+```shell
 ttx -q -t cmap -o - /tmp/Roboto-Regular-ABC.ttf
 ```
 
@@ -183,18 +201,6 @@ You should see something like:
   </cmap>
 
 </ttFont>
-```
-
-If you are manipulating a font with FontTools it will try to give you the glyphs by name as glyph order. Let's take a look at `/tmp/Roboto-Regular-ABC.ttf` (generated with `pyftsubset` above):
-
-```shell
-python
->>> from fontTools import ttLib
->>> font = ttLib.TTFont('/tmp/Roboto-Regular-ABC.ttf')
->>> font.getGlyphOrder()
-['.notdef', 'A', 'B', 'C']
->>> [font.getGlyphID(name) for name in font.getGlyphOrder()]
-[0, 1, 2, 3]
 ```
 
 ## Drawing Text
