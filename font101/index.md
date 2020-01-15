@@ -11,6 +11,7 @@ working on Google Fonts.
     1.  [pyftsubset](#pyftsubset), a tool to subset and optimize OpenType fonts
 1.  [OpenType Fonts](#opentype-fonts), the dominant modern font format
     1.  [Glyph IDs and 'cmap'](#glyph-ids-and-the-cmap-table), overview of how Unicode codepoints map to things you can draw
+1.  [Building Fonts with Fontmake](#building-fonts-with-fontmake)
 1.  [Drawing Text](#drawing-text), actually putting something on the screen
     1.  [hb-shape](#hb-shape), shape a run of text
     1.  [hb-view](#hb-view), render a run of text using a font
@@ -202,6 +203,51 @@ You should see something like:
 
 </ttFont>
 ```
+
+## Building Fonts with Fontmake
+
+[Fontmake](https://github.com/googlefonts/) is a command-line tool that compiles font
+sources to binary OpenType fonts. It supports sources in either
+[Glyphs.app](https://glyphsapp.com) format or [UFO](https://unifiedfontobject.com) format
+(which is the native format used by [Robofont](https://robofont.com) app and can be
+imported/exported in most font editors).
+
+Fontmake is just the compiler frontend, so to speak. Most of the heavy lifting work is
+done under the hood by a collections of Python libraries, including:
+
+- [glyphsLib](https://github.com/googlefonts/glyphsLib): to parse Glyphs files and
+  convert them to UFO format.
+- [ufo2ft](https://github.com/googlefonts/ufo2ft): takes UFO font objects and uses
+  FontTools to build the various OpenType tables.
+- [cu2qu](https://github.com/googlefonts/cu2qu): converts cubic Bezier curves (as
+  used by most font editing apps for drawing) to the kind of quadratic splines used
+  in TrueType-flavored OpenType fonts.
+
+You can install the `fontmake` CLI tool as usual with `pip install fontmake`.
+Or you can also download a self-contained zip-app from the fontmake [releases](https://github.com/googlefonts/fontmake/releases)
+page. Pick the one matching your local python3 version and platform, unzip it and run
+it like a regular executable.
+
+For example, say you want build a variable font for the Oswald project:
+
+```
+$ git clone https://github.com/googlefonts/OswaldFont
+$ cd OswaldFont
+$ fontmake -g sources/Oswald.glyphs -o variable
+```
+
+You'll find your Oswald-VF.ttf inside `./variable_ttf` subfolder.
+
+If you want to build static instances, you use `-i` option:
+
+```
+$ fontmake -g sources/Oswald.glyphs -i
+```
+
+By default fontmake will build _both_ TTF and OTF static fonts (respectively in
+``instance_ttf`` and ``instance_otf`` folders).
+
+Read ``fontmake --help`` for more options.
 
 ## Drawing Text
 
