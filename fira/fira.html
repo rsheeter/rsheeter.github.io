@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fira Code test</title>
+  <style>
+    @font-face {
+      font-family: 'Fira Code Git';
+      font-style: normal;
+      font-weight: 300;
+      src: url(FiraGithub.ttf) format('truetype');
+    }
+    @font-face {
+      font-family: 'Fira Code';
+      font-style: normal;
+      font-weight: 400;
+      src: url(FiraGithub.ttf) format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Fira Code Sandbox';
+      font-style: normal;
+      font-weight: 300;
+      src: url(FiraSandbox.ttf) format('truetype');
+    }
+    @font-face {
+      font-family: 'Fira Code Sandbox';
+      font-style: normal;
+      font-weight: 400;
+      src: url(FiraSandbox.ttf) format('truetype');
+    }
+
+    /* https://fonts.gstatic.com/s/firacode/v8/uU9NCBsR6Z2vfE9aq3bR2t6CilKOdQ.ttf */
+    @font-face {
+      font-family: 'Fira Code v8';
+      font-style: normal;
+      font-weight: 300;
+      src: url(Firav8.ttf) format('truetype');
+    }
+    @font-face {
+      font-family: 'Fira Code v8';
+      font-style: normal;
+      font-weight: 400;
+      src: url(Firav8.ttf) format('truetype');
+    }
+
+    .fira_git {
+      font-family: 'Fira Code Git';
+    }
+
+    .fira_sandbox {
+      font-family: 'Fira Code Sandbox';
+    }
+
+    .fira_v8 {
+      font-family: 'Fira Code v8';
+    }
+
+    .w300 { font-weight: 300; }
+    .w400 { font-weight: 400; }
+
+    body {
+      font-size: 36px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fira_git w300">This -> should => render >>= in <$> Fira Code:300 from upstream</div>
+  <div class="fira_git w400">This -> should => render >>= in <$> Fira Code:400 from upstream</div>
+
+  <div>&nbsp;</div>
+
+  <div class="fira_sandbox w300">This -> should => render >>= in <$> Fira Code:300 from sandbox</div>
+  <div class="fira_sandbox w400">This -> should => render >>= in <$> Fira Code:400 from sandbox</div>
+      
+  <div>&nbsp;</div>
+      
+  <div class="fira_v8 w300">This -> should => render >>= in <$> Fira Code:300 from cdn, updated</div>
+  <div class="fira_v8 w400">This -> should => render >>= in <$> Fira Code:400 from cdn, updated</div>
+</body>
+
+</html>
