@@ -285,9 +285,102 @@ ls -l byogf/fonts | wc -l # should be ~3,000
 git clone --recursive https://github.com/google/woff2.git
 (cd woff2 && make clean all)
 
-# warning: sloooww; we "pay" now to make all our users downloads faster
-find byogf/fonts -name *.[ot]tf -execdir /tmp/woff2/woff2_compress {} ;
+# warning: slow; we "pay" now to make all our users downloads faster
+time find byogf/fonts -name *.[ot]tf -execdir /tmp/woff2/woff2_compress {} \;
 ```
+
+Now we have `byogf/fonts` with a woff2 for most browsers and a ttf for browsers that don't like woff2. Let's make ourselves a server. Create a file in byogf called `font_server.py` with the following content:
+
+```python
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import textwrap
+import urllib
+
+_CSS_FOR_STYLE = {
+    'Thin': 'font-weight: 100;',
+    'ExtraLight': 'font-weight: 200;',
+    'Light': 'font-weight: 300;',
+    'Regular': '',
+    'Medium': 'font-weight: 500;',
+    'SemiBold': 'font-weight: 600;',
+    'Bold': 'font-weight: 700;',
+    'ExtraBold': 'font-weight: 800;',
+    'Black': 'font-weight: 900;',
+}
+_CSS_FOR_STYLE.update({k + 'Italic': v + ' font-style: italic;'
+                       for k, v in _CSS_FOR_STYLE.items()})
+_CSS_FOR_STYLE['Italic'] = _CSS_FOR_STYLE.pop('RegularItalic')
+
+class FontHandler(SimpleHTTPRequestHandler):
+    def _serve_css(self):
+        family, style = self.path[1:].split('/')
+        style_css = _CSS_FOR_STYLE[style]
+        css = f'''
+        @font-face {{
+            font-family: '{family}';
+            {style_css}
+            src: url(/fonts/{family}-{style}.woff2) format('woff2'),
+                 url(/fonts/{family}-{style}.ttf) format('truetype');
+        }}
+        '''
+        css = textwrap.dedent(css)
+
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/css; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(css.encode('utf-8'))
+
+    def do_GET(self):
+        if self.path == '/favicon.ico':
+            self.send_response(404)
+            self.end_headers()
+        elif self.path.startswith('/fonts/'):
+            super().do_GET()
+        elif self.path.endswith('.html'):
+            super().do_GET()
+        else:
+            # Blindly assume CSS request!
+            self._serve_css()
+
+
+if __name__ == '__main__':
+    print('Starting server, use <Ctrl-C> to stop')
+    HTTPServer(('', 8080), FontHandler).serve_forever()
+```
+Start it similar to `python3 font_server.py`. Try urls like http://localhost:8080/Lobster/Regular or http://localhost:8080/Lato/ThinItalic in your browser. Try creating a file `byogf/demo.html` with content similar to:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url(http://localhost:8080/Lobster/Regular);
+    @import url(http://localhost:8080/Lato/ThinItalic);
+    .lobster {
+      font-family: 'Lobster';
+    }
+    .lato100i {
+      font-family: 'Lato';
+      font-style: italic;
+      font-weight: 100;
+    }
+    body {
+      font-size: 4em;
+    }
+  </style>
+</head>
+<body>
+  <div class="lobster">Hello, World</div>
+  <div class="lato100i">Hello, World</div>
+</body>
+</html>
+```
+
+Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato. If you look in browser dev tools you should see the font downloads, probably in woff2 format.
+
+Congratulations, you have implemented your own version of Google Fonts!
+
+_TODO add unicode-range and demonstrate it_
 
 ## Drawing Text
 
