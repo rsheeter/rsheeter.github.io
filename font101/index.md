@@ -255,15 +255,15 @@ Read ``fontmake --help`` for more options.
 
 Sometimes after you create a font you want to use it on the internet. There are several tools and technologies you are likely to encounter:
 
-1.   OpenType Sanitizer ([OTS](https://github.com/khaledhosny/ots))
-   *  Chrome and Firefox reject fonts that don't pass OTS checks
-   *  The simplest way to test is to load your font in a browser and if it doesn't work check devtools for a console message about failing OTS
-   *  You can also build OTS from source and use the ot-sanitise utility; we'll show an example later
-1.   [WOFF2](https://en.wikipedia.org/wiki/Web_Open_Font_Format)
-   *  The best available font compression format, available in all modern browsers (https://caniuse.com/#feat=woff2)
-1.   [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)
-   *  Allows us to cut up a font (perhaps using [pyftsubset](#pyftsubset) or [hb-subset](#hb-subset)), tell the browser about the pieces and what characters they contain, and have it download only the ones it actually uses.
-   *  Our IUC42 presentation on CJK ([here](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)) talks more about unicode-range and how it can be used to serve large fonts
+1.  OpenType Sanitizer ([OTS](https://github.com/khaledhosny/ots))
+    *   Chrome and Firefox reject fonts that don't pass OTS checks
+    *   The simplest way to test is to load your font in a browser and if it doesn't work check devtools for a console message about failing OTS
+    *   You can also build OTS from source and use the ot-sanitise utility; we'll show an example later
+1.  [WOFF2](https://en.wikipedia.org/wiki/Web_Open_Font_Format)
+    *   The best available font compression format, available in all modern browsers (https://caniuse.com/#feat=woff2)
+1.  [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)
+    *   Allows us to cut up a font (perhaps using [pyftsubset](#pyftsubset) or [hb-subset](#hb-subset)), tell the browser about the pieces and what characters they contain, and have it download only the ones it actually uses.
+    *   Our IUC42 presentation on CJK ([here](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)) talks more about unicode-range and how it can be used to serve large fonts
 
 ### DIY Google Fonts
 
