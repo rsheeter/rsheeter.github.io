@@ -93,7 +93,7 @@ We could confirm our edit with TTX:
 
 ```shell
 ttx -q -o - -t "OS/2" /tmp/Roboto-Modified.ttf | grep usWeight
-    <usWeightClass value="400"/>
+    <usWeightClass value="500"/>
 ```
 
 ### pyftsubset
