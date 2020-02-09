@@ -13,7 +13,7 @@ working on Google Fonts.
     1.  [Glyph IDs and 'cmap'](#glyph-ids-and-the-cmap-table), overview of how Unicode codepoints map to things you can draw
 1.  [Building Fonts with Fontmake](#building-fonts-with-fontmake)
 1.  [Web serving](#web-serving)
-    1.  [BYO Google Fonts](#byo-google-fonts), build a totally viable python implementation of Google Fonts
+    1.  [DIY Google Fonts](#diy-google-fonts), build a totally viable python implementation of Google Fonts
 1.  [Drawing Text](#drawing-text), actually putting something on the screen
     1.  [hb-shape](#hb-shape), shape a run of text
     1.  [hb-view](#hb-view), render a run of text using a font
@@ -256,37 +256,29 @@ Read ``fontmake --help`` for more options.
 Sometimes after you create a font you want to use it on the internet. There are several tools and technologies you are likely to encounter:
 
 1.   OpenType Sanitizer ([OTS](https://github.com/khaledhosny/ots))
-    * Chrome and Firefox reject fonts that don't pass OTS checks
-    * The simplest way to test is to load your font in a browser and if it doesn't work check devtools for a console message about failing OTS
-    * You can also build OTS from source and use the ot-sanitise utility; we'll show an example later
+   *  Chrome and Firefox reject fonts that don't pass OTS checks
+   *  The simplest way to test is to load your font in a browser and if it doesn't work check devtools for a console message about failing OTS
+   *  You can also build OTS from source and use the ot-sanitise utility; we'll show an example later
 1.   [WOFF2](https://en.wikipedia.org/wiki/Web_Open_Font_Format)
-    * The best available font compression format, available in all modern browsers (https://caniuse.com/#feat=woff2)
+   *  The best available font compression format, available in all modern browsers (https://caniuse.com/#feat=woff2)
 1.   [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)
-    * Allows us to cut up a font (perhaps using [pyftsubset](#pyftsubset) or [hb-subset](#hb-subset)), tell the browser about the pieces and what characters they contain, and have it download only the ones it actually uses.
-    * Our IUC42 presentation on CJK ([here](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)) talks more about unicode-range and how it can be used to serve large fonts
+   *  Allows us to cut up a font (perhaps using [pyftsubset](#pyftsubset) or [hb-subset](#hb-subset)), tell the browser about the pieces and what characters they contain, and have it download only the ones it actually uses.
+   *  Our IUC42 presentation on CJK ([here](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)) talks more about unicode-range and how it can be used to serve large fonts
 
-### BYO Google Fonts
+### DIY Google Fonts
 
 Let's use some of the tools we've seen and build our very own copy of Google Fonts! - note that we're going to use python [http.server](https://docs.python.org/3/library/http.server.html) which is NOT suitable for production according to it's documentation.
+
+#### Basic Server
 
 ```shell
 # Google Fonts fonts
 git clone git@github.com:google/fonts.git
-# Google Fonts metadata
-git clone git@github.com:googlefonts/gftools.git
 
 # Grab all the fonts and put them into /byogf/fonts
 mkdir -p byogf/fonts
 find fonts -path 'fonts/*/*/*.[ot]tf' -execdir cp {} $(realpath byogf/fonts/) \;
 ls -l byogf/fonts | wc -l # should be ~3,000
-
-# Create compressed copies using woff2
-# woff2 has submodules, use --recursive to grab them too
-git clone --recursive https://github.com/google/woff2.git
-(cd woff2 && make clean all)
-
-# warning: slow; we "pay" now to make all our users downloads faster
-time find byogf/fonts -name *.[ot]tf -execdir /tmp/woff2/woff2_compress {} \;
 ```
 
 Now we have `byogf/fonts` with a woff2 for most browsers and a ttf for browsers that don't like woff2. Let's make ourselves a server. Create a file in byogf called `font_server.py` with the following content:
@@ -319,8 +311,7 @@ class FontHandler(SimpleHTTPRequestHandler):
         @font-face {{
             font-family: '{family}';
             {style_css}
-            src: url(/fonts/{family}-{style}.woff2) format('woff2'),
-                 url(/fonts/{family}-{style}.ttf) format('truetype');
+            src: url(/fonts/{family}-{style}.ttf) format('truetype');
         }}
         '''
         css = textwrap.dedent(css)
@@ -376,11 +367,51 @@ Start it similar to `python3 font_server.py`. Try urls like http://localhost:808
 </html>
 ```
 
-Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato. If you look in browser dev tools you should see the font downloads, probably in woff2 format.
+Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato. If you look in browser dev tools you should see the font downloads in ttf format.
 
 Congratulations, you have implemented your own version of Google Fonts!
 
-_TODO add unicode-range and demonstrate it_
+#### Compression
+
+Serving the raw font files is fine, but we can do better. We'll replicate Google Fonts transparent upgrade to woff2. Just like Google Fonts (woff2 [blog post](https://developers.googleblog.com/2015/02/smaller-fonts-with-woff-20-and-unicode.html)), our users won't have to change anything about their integration: font downloads get smaller for all users as soon as the server updates.
+
+```shell
+# Create compressed copies using woff2
+# woff2 has submodules, use --recursive to grab them too
+git clone --recursive https://github.com/google/woff2.git
+(cd woff2 && make clean all)
+
+# warning: SLOW; we "pay" now to make our users downloads faster
+time find byogf/fonts -name *.[ot]tf -execdir /tmp/woff2/woff2_compress {} \;
+```
+
+Now we have a woff2 file for every font, add it to the CSS. Open `font_server.py` and amend the CSS construction:
+
+```python
+BEFORE
+        css = f'''
+        @font-face {{
+            font-family: '{family}';
+            {style_css}
+            src: url(/fonts/{family}-{style}.ttf) format('truetype');
+        }}
+        '''
+AFTER
+        css = f'''
+        @font-face {{
+            font-family: '{family}';
+            {style_css}
+            src: url(/fonts/{family}-{style}.woff2) format('woff2'),
+                 url(/fonts/{family}-{style}.ttf) format('truetype');
+        }}
+        '''
+```
+
+Restart the server and retry your demo.html. You should see in dev tools that you are now downloading woff2 files instead of ttfs.
+
+#### unicode-range
+
+Unicode-range lets us cut a font into pieces, tell the browser what codepoints are available in each piece, and have the browser download only the pieces it needs. Google Fonts publishes files listing how we cut up fonts [here](https://github.com/googlefonts/gftools/tree/master/Lib/gftools/encodings). For Chinese, Japanese, and Korean (CJK) we cut each font into a larger number (~100) of pieces (explained in our IUC42 [presentation](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)). The CJK subsetting files are not published at time of writing.
 
 ## Drawing Text
 
