@@ -280,7 +280,7 @@ find fonts -path 'fonts/*/*/*.[ot]tf' -execdir cp {} $(realpath byogf/fonts/) \;
 ls -l byogf/fonts | wc -l # should be ~3,000
 ```
 
-Now we have `byogf/fonts` with a woff2 for most browsers and a ttf for browsers that don't like woff2. Let's make ourselves a server. Create a file in byogf called `font_server.py` with the following content:
+Now we have `byogf/fonts` setup let's make ourselves a server. Create a file in byogf called `font_server.py` with the following content:
 
 {% raw %}
 ```python
