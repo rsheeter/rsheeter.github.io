@@ -34,13 +34,12 @@ source venv/bin/activate
 
 FontTools is the swiss army knife of fonts. It lets you load, modify, and save a font from Python.
 
-I assume you want to be able to mess with the source, and that you have an active venv. If you don't need to play with the code just `pip install fonttools`. If you just want to browse the source see https://github.com/fonttools/fonttools.
+I assume you want to be able to mess with the source, and that you have an active venv. If you don't need to play with the code just `pip install fonttools`. If you just want to browse the source see https://github.com/fonttools/fonttools
 
 ### Local Setup
 ```shell
 git clone git@github.com:fonttools/fonttools.git
-cd fonttools
-pip install -e .
+pip install -e fonttools/
 ```
 
 ### TTX
@@ -75,7 +74,7 @@ See also FontTools explanation of TTX [here](https://github.com/fonttools/fontto
 ### TTFont
 
 [TTFont](https://github.com/fonttools/fonttools/blob/master/Lib/fontTools/ttLib/ttFont.py) is a Python class that can 
-read/write OpenType font files. For example, let's suppose we decided Roboto-Regular.ttf had the wrong metadata for weight and we want to fix [usWeightClass](https://docs.microsoft.com/en-us/typography/opentype/spec/os2#usweightclass) programmatically:
+read/write OpenType font files. For example, let's suppose we decided `Roboto-Regular.ttf` had the wrong metadata for weight and we want to fix [usWeightClass](https://docs.microsoft.com/en-us/typography/opentype/spec/os2#usweightclass) programmatically:
 
 ```shell
 # clone https://github.com/google/fonts, assumed to be in ./fonts for this example
@@ -451,11 +450,10 @@ harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC"
 harfbuzz/util/hb-shape --help-output-syntax
 
 # OK, I just want gid and advance
-harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC" --no-glyph-names --no-clusters
+harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC" \
+                       --no-glyph-names --no-clusters
 [37+1336|38+1275|39+1333]
 ```
-
-TODO: complex script example, mention layout
 
 Hopefully this illustrates that hb-shape runs on a single run of characters in a single font and tells you what gids to use and how to lay them out. You still need something else to actually DO that, but HarfBuzz has done a LOT of the hard work for you.
 
@@ -464,6 +462,7 @@ Hopefully this illustrates that hb-shape runs on a single run of characters in a
 [hb-view](https://harfbuzz.github.io/utilities.html#utilities-command-line-hbview) lets you shape and render a string. For example:
 
 ```shell
-harfbuzz/util/hb-view fonts/apache/roboto/Roboto-Regular.ttf "ABC" --output-file=/tmp/roboto-abc.png
+harfbuzz/util/hb-view fonts/apache/roboto/Roboto-Regular.ttf "ABC" \
+                      --output-file=/tmp/roboto-abc.png
 display /tmp/roboto-abc.png
 ```
