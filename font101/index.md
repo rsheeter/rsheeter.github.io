@@ -282,6 +282,7 @@ ls -l byogf/fonts | wc -l # should be ~3,000
 
 Now we have `byogf/fonts` with a woff2 for most browsers and a ttf for browsers that don't like woff2. Let's make ourselves a server. Create a file in byogf called `font_server.py` with the following content:
 
+{% raw %}
 ```python
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import textwrap
@@ -337,6 +338,8 @@ if __name__ == '__main__':
     print('Starting server, use <Ctrl-C> to stop')
     HTTPServer(('', 8080), FontHandler).serve_forever()
 ```
+{% endraw %}
+
 Start it similar to `python3 font_server.py`. Try urls like http://localhost:8080/Lobster/Regular or http://localhost:8080/Lato/ThinItalic in your browser. Try creating a file `byogf/demo.html` with content similar to:
 
 ```html
