@@ -1,7 +1,8 @@
 # Font Eng 102: Font Fallback
 
 An introduction to font fallback. Primarily aimed at people working on
-Google Fonts.
+Google Fonts. The reader is assumed to have basic familiarity with with
+[Font 101](../font101).
 
 Imagine we offer email, chat, or any other service where user-entered
 text can be displayed. Users will probably expect more than basic latin
@@ -13,7 +14,7 @@ Note: Google Translate was used for most non-latin examples.
 
 ## Fallback Chains
 
-It is implausible for a single font, limited to 65k chars, to support all the worlds languages. We’re going to need a bunch of fonts. If we have multiple fonts we'll also need rules for how to choose which one should be used to render a given unit of text. Let's call `({)fonts, rules)` a font configuration. 
+It is implausible for a single font, limited to 65k chars, to support all the worlds languages. We’re going to need a bunch of fonts. If we have multiple fonts we'll also need rules for how to choose which one should be used to render a given unit of text. Let's call `(fonts, rules)` a font configuration. 
 
 We can now specify our problem a bit more concretely:
 
