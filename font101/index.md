@@ -389,6 +389,7 @@ time find byogf/fonts -name *.[ot]tf -execdir /tmp/woff2/woff2_compress {} \;
 
 Now we have a woff2 file for every font, add it to the CSS. Open `font_server.py` and amend the CSS construction:
 
+{% raw %}
 ```python
 BEFORE
         css = f'''
@@ -408,6 +409,7 @@ AFTER
         }}
         '''
 ```
+{% endraw %}
 
 Restart the server and retry your demo.html. You should see in dev tools that you are now downloading woff2 files instead of ttfs.
 
