@@ -99,7 +99,7 @@ ttx -q -o - -t "OS/2" /tmp/Roboto-Modified.ttf | grep usWeight
 
 [pyftsubset](https://github.com/fonttools/fonttools/blob/master/Lib/fontTools/subset/__init__.py) lets you cut up fonts.
 
-If you look at the CSS Google Fonts send to consumers (ex https://fonts.googleapis.com/css2?family=Roboto) you can see a bunch of different `@font-face` blocks, each with it's own unicode-range. The browser will download only the parts required to render the characters on the page (more detail on this [here](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)).
+If you look at the CSS Google Fonts send to consumers (ex [Roboto](https://fonts.googleapis.com/css2?family=Roboto)) you can see a bunch of different `@font-face` blocks, each with it's own unicode-range. The browser will download only the parts required to render the characters on the page (more detail on this [here](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)).
 
 Let's suppose we want to cut a cyrillic block out of Roboto, matching the unicode-range for cyrillic from `/css2`:
 
@@ -125,7 +125,7 @@ pyftsubset fonts/apache/roboto/Roboto-Regular.ttf \
 
 You can also use pyftsubset to drop hints, remove unwanted layout features, etc.
 
-The original file is, at time of writing, 168KB. The cyrillic subset is 24KB. By default pyftsubset performs a number of optimizations that remove parts of the font unlikely to be needed for web usage. If you want to remove characters and keep everything else you have to opt out of this. See `--help`.
+The original file is, at time of writing, 168KB. The cyrillic subset is 24KB. By default `pyftsubset` performs a number of optimizations that remove parts of the font unlikely to be needed for web usage. If you want to remove characters and keep everything else you have to opt out of this. See `--help`.
 
 ## OpenType Fonts
 
@@ -410,7 +410,27 @@ Restart the server and retry your demo.html. You should see in dev tools that yo
 
 #### unicode-range
 
-Unicode-range lets us cut a font into pieces, tell the browser what codepoints are available in each piece, and have the browser download only the pieces it needs. Google Fonts publishes files listing how we cut up fonts [here](https://github.com/googlefonts/gftools/tree/master/Lib/gftools/encodings). For Chinese, Japanese, and Korean (CJK) we cut each font into a larger number (~100) of pieces (explained in our IUC42 [presentation](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)). The CJK subsetting files are not published at time of writing.
+[unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) lets us cut a font into pieces, tell the browser what codepoints are available in each piece, and have the browser download only the pieces it needs. The CSS looks like this:
+
+```css
+/* Simplification of http://fonts.googleapis.com/css2?family=Merriweather */
+
+/* cyrillic */
+@font-face
+    font-family: 'Merriweather';
+    src: url(.../merriweather/cyrillic.woff2); /* Download this */
+    unicode-range: U+0400-045F;                /* If page uses these codepoints */
+
+/* latin */
+@font-face
+    font-family: 'Merriweather';
+    src: url(.../merriweather/latin.woff2);    /* Download this */
+    unicode-range: U+0000-00FF;                /* If page uses these codepoints */
+```
+
+Google Fonts publishes files listing how we cut up fonts [here](https://github.com/googlefonts/gftools/tree/master/Lib/gftools/encodings).
+
+For Chinese, Japanese, and Korean (CJK) we cut each font into a larger number (~100) of pieces (explained in our IUC42 [presentation](https://www.unicodeconference.org/presentations-42/S5T3-Sheeter.pdf)). The CJK subsetting files are not published at time of writing.
 
 ## Drawing Text
 
