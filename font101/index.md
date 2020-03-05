@@ -124,7 +124,21 @@ pyftsubset fonts/apache/roboto/Roboto-Regular.ttf \
   --output-file=/tmp/Roboto-Regular-Cyrillic.ttf
 ```
 
-You can also use pyftsubset to drop hints, remove unwanted layout features, etc.
+The subsetter can also be used as a library:
+
+```python
+from fontTools import subset, ttLib
+
+font = ttLib.TTFont('fonts/apache/roboto/Roboto-Regular.ttf')
+
+subset_opts = subset.Options()
+subsetter = subset.Subsetter(options=subset_opts)
+subsetter.populate(text='ABC')
+subsetter.subset(font)
+font.save('/tmp/Roboto-ABC.ttf')
+```
+
+You can also use the fontTools subsetter to drop hints, remove unwanted layout features, etc.
 
 The original file is, at time of writing, 168KB. The cyrillic subset is 24KB. By default `pyftsubset` performs a number of optimizations that remove parts of the font unlikely to be needed for web usage. If you want to remove characters and keep everything else you have to opt out of this. See `--help`.
 
