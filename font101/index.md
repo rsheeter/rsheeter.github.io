@@ -29,6 +29,7 @@ I assume you have:
 python3 -m venv venv
 source venv/bin/activate
 ```
+*  If on Mac, install coreutils so `realpath` is present. Homebrew: `brew install coreutils`.
 
 ## FontTools
 
