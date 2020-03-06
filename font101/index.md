@@ -447,7 +447,6 @@ Congratulations, you have implemented your own version of Google Fonts!
 
 Serving the raw font files is fine, but we can do better. We'll replicate Google Fonts transparent upgrade to woff2. Just like Google Fonts (woff2 [blog post](https://developers.googleblog.com/2015/02/smaller-fonts-with-woff-20-and-unicode.html)), our users won't have to change anything about their integration: font downloads get smaller for all users as soon as the server updates.
 
-{% raw %}
 ```shell
 # Create compressed copies using woff2
 # woff2 has submodules, use --recursive to grab them too
@@ -458,11 +457,10 @@ git clone --recursive https://github.com/google/woff2.git
 # If you are just playing maybe do a subset of the files
 time find byogf/fonts -name '*.[ot]tf' -execdir ./woff2/woff2_compress {} \;
 ```
-{% endraw %}
 
 Now we have a woff2 file for every font, add it to the CSS. Open `font_server.py` and amend the CSS construction:
 
-```python
+{% raw %}```python
 BEFORE
         css = f'''
         @font-face {{
@@ -480,7 +478,7 @@ AFTER
                  url(/fonts/{family}-{style}.ttf) format('truetype');
         }}
         '''
-```
+```{% endraw %}
 
 Restart the server and retry your demo.html. You should see in dev tools that you are now downloading woff2 files instead of ttfs.
 
