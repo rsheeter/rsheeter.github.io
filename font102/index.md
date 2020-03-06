@@ -1,7 +1,7 @@
 # Font Eng 102: Font Fallback
 
 An introduction to font fallback. Primarily aimed at people working on
-Google Fonts. The reader is assumed to have basic familiarity with with
+Google Fonts. The reader is assumed to have basic familiarity with
 [Font 101](../font101).
 
 Imagine we offer email, chat, or any other service where user-entered
