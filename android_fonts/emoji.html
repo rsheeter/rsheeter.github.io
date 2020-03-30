@@ -34,6 +34,7 @@
   </style>
   <style id="dynamic_styles"></style>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="vue-virtual-scroll-list.js"></script>
 </head>
 <body>
   <div id="app">
@@ -61,7 +62,6 @@
         <span class="rowhead">Codepoints</span>
         <span class="rowhead">Notes</span>
       </template>
-      
       <template v-for="api_level in visible_apis">
         <span>{{ api_level }}</span>
       </template>
@@ -69,18 +69,20 @@
         <span></span>
         <span></span>
       </template>
-
-      <template v-for="match in matches">
-        <template v-for="api_level in visible_apis">
-          <span v-bind:class="emoji_css_class(match, api_level)"
-                v-html="emoji_html(match, api_level)"/>
-        </template>
-        <span v-html="codepoint_html(match)"></span>
-        <span>
-          {{ match.notes }}
-        </span>
+      <template>
+        <virtual-list :size="56" :remain="20" :pagemode="true">
+          <item v-for="match in matches" :key="match.id">
+            <template v-for="api_level in visible_apis">
+              <span v-bind:class="emoji_css_class(match, api_level)"
+                    v-html="emoji_html(match, api_level)"/>
+            </template>
+            <span v-html="codepoint_html(match)"></span>
+            <span>
+              {{ match.notes }}
+            </span>
+          </item>
+        </virtual-list>
       </template>
-
     </div>
   </div>
 
