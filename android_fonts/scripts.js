@@ -83,7 +83,6 @@ function emojiVue() {
         min_font_api: 21,
         max_api: 0,
         visible_apis: [],
-        max_rows: 1536,  // grid seems super slow past about 1000 rows
       }
     },
     mounted() {
@@ -250,7 +249,7 @@ function doEmojiSearch(query) {
   let matches = vm.all
                   .filter(emoji => filters.every(f => f.pred(emoji[f.field])));
   vm.match_len = matches.length;
-  vm.matches = Object.freeze(matches.slice(0, vm.max_rows));
+  vm.matches = matches;
 
   if (new URLSearchParams(window.location.search).get('q') !== query) {
     history.pushState(query, "Android Emoji", `?q=${query}`);
