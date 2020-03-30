@@ -83,7 +83,7 @@ function emojiVue() {
         min_font_api: 21,
         max_api: 0,
         visible_apis: [],
-        max_rows: 1024,  // grid seems super slow with lots of rows
+        max_rows: 1536,  // grid seems super slow past about 1000 rows
       }
     },
     mounted() {
@@ -93,10 +93,12 @@ function emojiVue() {
           log(`Info available for ${seqs.length} seqs`);
 
           this.all = Object.freeze(seqs);
-          this.all.forEach(s => s.api_support.forEach(api => {
-            this.min_api = Math.min(api, this.min_api);
-            this.max_api = Math.max(api, this.max_api);
-          }));
+          for (const s of this.all) {
+            for (const api of s.api_support) {
+              this.min_api = Math.min(api, this.min_api);
+              this.max_api = Math.max(api, this.max_api);
+            }
+          }
 
           // create font faces for font capable APIs
           let style = document.createElement('style');
@@ -138,7 +140,7 @@ function emojiVue() {
         }
         // supported but no font, there should be an image
         return '<img src="./api_level/'
-              + api_level.toString() 
+              + api_level.toString()
               + '/emoji_u'
               +  emoji.codepoints
                       .map(cp => cp.toString(16).padStart(4, '0'))
@@ -232,7 +234,7 @@ function doEmojiSearch(query) {
     .filter(api => api != 20);  // 20 doesn't exist
 
   // Build styles for display of the new results
-  rowStyle = '#results {\n'
+  rowStyle = '#results, item {\n'
            + '  display: grid;\n'
            + '  grid-gap: 0.1em;\n'
            + `  grid-template-columns: repeat(${vm.visible_apis.length}, 4em)`
