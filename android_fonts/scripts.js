@@ -83,6 +83,7 @@ function emojiVue() {
         min_font_api: 21,
         max_api: 0,
         visible_apis: [],
+        search_error: '',
       }
     },
     mounted() {
@@ -163,7 +164,28 @@ function numericFilter(parseFn, raw, base) {
   }
   const lbound = parseFn(parts[0], base);
   const ubound = parseFn(parts[1], base);
+  if (isNaN(lbound) || isNaN(ubound)) {
+    throw `Unable to parse ${raw}`;
+  }
+  if (lbound > ubound) {
+    throw 'lbound must be <= ubound';
+  }
   return (v) => v >= lbound && v <= ubound;
+}
+
+function diffFilter(raw) {
+  if (raw.indexOf('..') == -1) {
+    raw += '..1.0'
+  }
+  let numberFilter = numericFilter(parseFloat, raw, 10);
+  return (diffs) => {
+    max_diff = vm.visible_apis
+                .slice(0, -1)
+                .map(v => diffs['' + v + '_' + (v+1)])
+                .filter(v => v !== undefined)
+                .reduce((a,b) => Math.max(a, b));
+    return numberFilter(max_diff);
+  };
 }
 
 function makeFilter(type, raw_value) {
@@ -197,10 +219,12 @@ function makeFilter(type, raw_value) {
     value_pred = numericFilter(parseInt, raw_value, 10);
     pred = (seq) => value_pred(seq[0]);
     break;
+  case 'diff':
+    field = 'diffs';
+    pred = diffFilter(raw_value);
+    break;
   default:
-    console.log(`Poorly formed ${type}:${raw_value}`)
-    field = '_';
-    pred = (_) => false;
+    throw `Poorly formed ${type}:${raw_value}`;
   }
   return { 'field': field, 'pred': pred };
 }
@@ -233,15 +257,19 @@ function doEmojiSearch(query) {
     .filter(api => api != 20);  // 20 doesn't exist
 
   // Build styles for display of the new results
-  rowStyle = '#results, item {\n'
-           + '  display: grid;\n'
-           + '  grid-gap: 0.1em;\n'
-           + `  grid-template-columns: repeat(${vm.visible_apis.length}, 4em)`
-           + ' minmax(4em, 1fr)' // codepoints column
-           + ' minmax(6em, 3fr)' // notes column
-           + ';\n'
-           + '}\n'
-           ;
+  rowStyle = `
+    .gridify {
+      display: grid;
+      grid-gap: 0.1em;
+      grid-template-columns:
+        repeat(${vm.visible_apis.length}, 4rem)
+        minmax(6rem, 1fr)
+        minmax(6rem, 3fr);
+    }
+    .cell--api-header {
+      grid-template-columns: repeat(${vm.visible_apis.length}, 1fr);
+    }
+  `;
   dynStyles.appendChild(document.createTextNode(rowStyle));
 
   // update Vue, triggering UI refresh
@@ -259,6 +287,16 @@ function doEmojiSearch(query) {
   log(`doEmojiSearch took ${(endTime - startTime)} ms ${query} has ${vm.matches.length} results`)
 }
 
+function tryEmojiSearch(query) {
+  vm.search_error = ''
+  try {
+    doEmojiSearch(query);
+  } catch (ex) {
+    console.error('Search ' + query + ' failed: ' + ex)
+    vm.search_error = ex.toString();
+  }
+}
+
 var activeSearch = null;
 function queueEmojiSearch(e) {
   if (!!activeSearch) {
@@ -266,5 +304,5 @@ function queueEmojiSearch(e) {
     activeSearch = null;
   }
   let query = e.target.value;
-  activeSearch = setTimeout(() => doEmojiSearch(query), 500);
+  activeSearch = setTimeout(() => tryEmojiSearch(query), 500);
 }

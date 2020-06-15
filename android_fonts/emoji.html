@@ -1,93 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-  @import url(//fonts.googleapis.com/css?family=Inconsolata:400,700|Adobe+Blank);
-  body {
-    font-family: 'Inconsolata', sans-serif;
-    margin: 1em;
-  }
-  h1 {
-    font-size: 2em;
-  }
-  #search_input {
-    width: 100%;
-    font-size: 1.5em;
-  }
-
-  .emoji {
-    font-size: 3em;
-  }
-
-  #head_api_level {
-    grid-column: 1/-3;
-  }
-  .rowhead {
-    padding: 0.2em;
-  }
-  .rowhead:nth-child(even) {
-    background-color: #F0F0F0;
-  }
-  .rowhead:nth-child(odd) {
-    background-color: #D8D8D8;
-  }
-  </style>
+  <title>Emoji Search</title>
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@v6.0.0/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/search.css">
   <style id="dynamic_styles"></style>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="third_party/vue-virtual-scroll-list/vue-virtual-scroll-list.js"></script>
 </head>
 <body>
-  <div id="app">
-    <h1>Android Fonts</h1>
-    <div>
-      <a href="./">History</a>
-      |
-      Emoji
+  <header class="mdc-top-app-bar app-bar mdc-theme--surface" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <h1 class="mdc-top-app-bar__title mdc-theme--primary">Android Fonts</h1>
+      </section>
+      <nav class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+        <a href="./" class="mdc-top-app-bar__action-item mdc-button navigation-tab">
+          History
+        </a>
+        <a href="./emoji.html" class="mdc-top-app-bar__action-item mdc-button navigation-tab navigation-tab--active">
+          Emoji Search
+        </a>
+      </nav>
     </div>
-    <div class="header">
-      <input type="text" required="" name="s" id="search_input"
-             placeholder="Search, e.g. u:263A emoji:10 api:22..28 note:&quot;wrestler&quot;"
-             value="">
-    </div>
-    <div v-if="all.length > 0">
-      {{ match_len }} / {{ all.length }} sequences match.
-      <span v-if="match_len > matches.length">
-        Showing first {{ matches.length }}.
-      </span>
-    </div>
-    <div id="results"
-         v-if="matches.length > 0">
-      <template>
-        <span class="rowhead" id="head_api_level">Android API Level</span>
-        <span class="rowhead">Codepoints</span>
-        <span class="rowhead">Notes</span>
-      </template>
-      <template v-for="api_level in visible_apis">
-        <span>{{ api_level }}</span>
-      </template>
-      <template>
-        <span></span>
-        <span></span>
-      </template>
-      <template>
-        <virtual-list :size="56" :remain="20" :pagemode="true">
-          <item v-for="match in matches" :key="match.id">
-            <template v-for="api_level in visible_apis">
-              <span v-bind:class="emoji_css_class(match, api_level)"
-                    v-html="emoji_html(match, api_level)"/>
-            </template>
-            <span v-html="codepoint_html(match)"></span>
-            <span>
-              {{ match.notes }}
-            </span>
-          </item>
-        </virtual-list>
-      </template>
-    </div>
-  </div>
+  </header>
 
+  <main class="mdc-top-app-bar--fixed-adjust" id="app">
+    <div class="center">
+      <header>
+        <label class="mdc-text-field mdc-text-field--filled search-input-label">
+          <div class="mdc-text-field__ripple"></div>
+          <input class="mdc-text-field__input" required type="text" name="s" id="search_input" aria-labelledby="my-label-id" autofocus value="" />
+          <span class="mdc-floating-label" id="my-label-id">Search Query</span>
+          <div class="mdc-line-ripple"></div>
+        </label>
+        <div class="mdc-text-field-helper-line">
+          <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">
+            e.g.: u:263A emoji:10 api:22..28 note:&quot;wrestler&quot;" diff:0.25
+          </div>
+        </div>
+      </header>
+      <div v-if="all.length > 0">
+        <p>
+          {{ match_len }} / {{ all.length }} sequences match.
+          <span v-if="search_error.length > 0" class="error">
+            Search failed: {{ search_error }}
+          </span>
+        </p>
+      </div>
+      <div id="results" class="gridify mdc-data-table" v-if="matches.length > 0">
+        <template>
+          <span class="mdc-data-table__header-cell cell--api-header">
+            <span class="cell--api-level">Android API Level</span>
+            <template v-for="api_level in visible_apis">
+              <span>{{ api_level }}</span>
+            </template>
+          </span>
+          <span class="mdc-data-table__header-cell cell--header">Codepoints</span>
+          <span class="mdc-data-table__header-cell cell--header">Notes</span>
+        </template>
+        <template>
+          <span></span>
+          <span></span>
+        </template>
+        <template>
+          <virtual-list :size="56" :remain="20" :pagemode="true" wclass="gridify--full">
+            <div class="gridify row" v-for="match in matches" :key="match.id">
+              <template v-for="api_level in visible_apis">
+                <span class="cell"
+                      v-bind:class="emoji_css_class(match, api_level)"
+                      v-html="emoji_html(match, api_level)"/>
+              </template>
+              <span class="cell cell--codepoints" v-html="codepoint_html(match)"></span>
+              <span class="cell">
+                {{ match.notes }}
+              </span>
+            </div>
+          </virtual-list>
+        </template>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/material-components-web@v6.0.0/dist/material-components-web.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="third_party/vue-virtual-scroll-list/vue-virtual-scroll-list.js"></script>
   <script src="scripts.js"></script>
   <script>
+    const topAppBar = new mdc.topAppBar.MDCTopAppBar.attachTo(document.querySelector('.mdc-top-app-bar'));
+    topAppBar.setScrollTarget(document.querySelector('#app'));
+
+    const textField = new mdc.textField.MDCTextField(document.querySelector('.mdc-text-field'));
+    const helperText = new mdc.textField.MDCTextFieldHelperText(document.querySelector('.mdc-text-field-helper-text'));
+
     let vm = emojiVue();
     (function() {
       let search = document.getElementById('search_input');

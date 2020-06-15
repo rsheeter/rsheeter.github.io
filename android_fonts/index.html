@@ -1,102 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-  @import url(//fonts.googleapis.com/css?family=Inconsolata:400,700);
-  body {
-    font-family: 'Inconsolata', sans-serif;
-    margin: 1em;
-  }
-  h1 {
-    font-size: 2em;
-  }
-  .card {
-    margin-bottom: 1em;
-    padding: 1em;
-    background-color: #F0F0F0;
-  }
-  .apk-level {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "header header"
-      "font-summary emoji-summary"
-    ;
-  }
-  .header {
-    grid-area: header;
-  }
-  .font-summary {
-    grid-area: font-summary;
-  }
-  .emoji-summary {
-    grid-area: emoji-summary;
-  }
-  .labels {
-    display: inline-block;
-    width: auto;
-  }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Emoji History</title>
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@v6.0.0/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/history.css">
 </head>
 <body>
-  <div id="app">
-    <h1>Android Fonts : History</h1>
-    <div>
-      History
-      | 
-      <a href="emoji.html">Emoji</a>
+  <header class="mdc-top-app-bar app-bar mdc-theme--surface" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <h1 class="mdc-top-app-bar__title mdc-theme--primary">Android Fonts</h1>
+      </section>
+      <nav class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+        <a href="./" class="mdc-top-app-bar__action-item mdc-button navigation-tab navigation-tab--active">
+          History
+        </a>
+        <a href="./emoji.html" class="mdc-top-app-bar__action-item mdc-button navigation-tab">
+          Emoji Search
+        </a>
+      </nav>
     </div>
-    <div class="card">
-      <h2>Font Size History</h2>
-      <div>
-        <img src="size_total.png"/>
-        <img src="size_change.png"/>
-      </div>
-    </div>
-    <template v-for="api_level in api_levels">
-      <div class="apk-level card">
-        <h2 class="header">
-          {{api_level.name}}
-          ({{api_level.version}}, API {{api_level.api_level}})
-        </h2>
+  </header>
 
-        <div class="font-summary">
-          <h3>Fonts</h3>
-          <div class="labels">
-            <div>
-              {{api_level.fonts.size_MB | fixed(1)}} MB
-              ({{api_level.fonts.delta_size_MB | delta(1)}} MB)
+  <main class="mdc-top-app-bar--fixed-adjust" id="app">
+    <div class="center">
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="card mdc-card mdc-layout-grid__cell--span-12">
+            <h2 class="mdc-typography--headline5">Font Size History</h2>
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <img src="size_total.png" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6"/>
+                <img src="size_change.png" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6"/>
+              </div>
             </div>
-            <div>{{api_level.fonts.num_files}} files</div>
+          </div>
+      <template v-for="api_level in api_levels">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+          <div class="apk-level card mdc-card">
+            <h2 class="mdc-typography--headline5">
+              {{api_level.name}}
+              ({{api_level.version}}, API {{api_level.api_level}})
+            </h2>
+
+            <div class="font-summary">
+              <h3 class="mdc-typography--headline6">Fonts</h3>
+              <div class="mdc-chip mdc-chip--disabled">
+                {{api_level.fonts.size_MB | fixed(1)}} MB
+                ({{api_level.fonts.delta_size_MB | delta(1)}} MB)
+              </div>
+              <div class="mdc-chip mdc-chip--disabled">
+                {{api_level.fonts.num_files}} files
+              </div>
+            </div>
+
+            <div class="emoji-summary">
+              <h3 class="mdc-typography--headline6">Emoji</h3>
+              <div v-if="api_level.emoji.supported > 0">
+                <p>
+                  <a v-bind:href="emoji_url('api:' + api_level.api_level)">{{api_level.emoji.supported}} sequences</a>
+                  (<a v-bind:href="emoji_url('api_added:' + api_level.api_level)">{{api_level.emoji.delta | delta(0)}}</a>)
+                </p>
+              </div>
+              <div class="mdc-data-table">
+                <table class="mdc-data-table__table">
+                  <thead>
+                    <tr class="mdc-data-table__header-row">
+                      <th class="mdc-data-table__header-cell">Version</th>
+                      <th class="mdc-data-table__header-cell">Sequences</th>
+                    </tr>
+                  </thead>
+                  <tbody class="mdc-data-table__content">
+                    <tr class="mdc-data-table__row" v-for="emoji in api_level.emoji.by_level">
+                      <td class="mdc-data-table__cell">Emoji {{emoji.emoji_level | fixed(1)}}</td>
+                      <td class="mdc-data-table__cell">{{emoji.supported}} / {{emoji.total}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
+      </template>
+    </div>
+  </main>
 
-        <div class="emoji-summary">
-          <h3>Emoji</h3>
-          <div v-if="api_level.emoji.supported > 0" class="labels">
-            <div>
-              <a v-bind:href="emoji_url('api:' + api_level.api_level)">{{api_level.emoji.supported}} sequences</a>
-              (<a v-bind:href="emoji_url('api_added:' + api_level.api_level)">{{api_level.emoji.delta | delta(0)}}</a>)
-            </div>
-            <div v-for="emoji in api_level.emoji.by_level">
-              Emoji {{emoji.emoji_level | fixed(1)}}:
-            </div>
-          </div>
-          <div class="labels">
-            <div v-for="emoji in api_level.emoji.by_level">
-              {{emoji.supported}} / {{emoji.total}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-  </div>
-
-  <script src="scripts.js"></script>
-  <script>
-    let vm = indexVue();
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="scripts.js"></script>
+<script>
+const vm = indexVue();
+</script>
 </body>
 </html>

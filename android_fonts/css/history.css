@@ -1,0 +1,10 @@
+@import url(//fonts.googleapis.com/css?family=Inconsolata:400,700);
+.card {
+  background-color: rgba(0 0 0 / .04);
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.mdc-chip--disabled {
+  cursor: auto;
+}
