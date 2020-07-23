@@ -863,5 +863,65 @@
         }
       ]
     }
+  },
+  "30": {
+    "name": "Android11",
+    "version": "11",
+    "fonts": {
+      "num_files": 257,
+      "size_MB": 74.0665130615,
+      "delta_size_MB": 0.5683517456
+    },
+    "emoji": {
+      "delta": 285.0,
+      "supported": 3305.0,
+      "by_level": [
+        {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
+          "emoji_level": 4.0,
+          "supported": 608,
+          "total": 608
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 239,
+          "total": 239
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 157,
+          "total": 157
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 230,
+          "total": 230
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 168,
+          "total": 168
+        },
+        {
+          "emoji_level": 13.0,
+          "supported": 117,
+          "total": 117
+        }
+      ]
+    }
   }
 }
