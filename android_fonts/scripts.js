@@ -212,7 +212,13 @@ function makeFilter(type, raw_value) {
     if (quoted != null) {
       raw_value = quoted[1]
     }
-    pred = (s) => s.indexOf(raw_value) != -1;
+    let raw_regex = raw_value.match(/^[/]([^/]+)[/]$/)
+    if (raw_regex != null) {
+      let regex = new RegExp(raw_regex[1]);
+      pred = (s) => s.match(regex) != null;
+    } else {
+      pred = (s) => s.indexOf(raw_value) != -1;
+    }
     break;
   case 'api_added':
     field = 'api_support';
