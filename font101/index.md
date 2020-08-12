@@ -126,16 +126,16 @@ pyftsubset fonts/ofl/roboto/static/Roboto-Regular.ttf \
 
 The subsetter can also be used as a library:
 
-```python
-from fontTools import subset, ttLib
+```shell
+python
+>>> from fontTools import subset, ttLib
+>>> font = ttLib.TTFont('fonts/ofl/roboto/static/Roboto-Regular.ttf')
 
-font = ttLib.TTFont('fonts/ofl/roboto/static/Roboto-Regular.ttf')
-
-subset_opts = subset.Options()
-subsetter = subset.Subsetter(options=subset_opts)
-subsetter.populate(text='ABC')
-subsetter.subset(font)
-font.save('/tmp/Roboto-ABC.ttf')
+>>> subset_opts = subset.Options()
+>>> subsetter = subset.Subsetter(options=subset_opts)
+>>> subsetter.populate(text='ABC')
+>>> subsetter.subset(font)
+>>> font.save('/tmp/Roboto-ABC.ttf')
 ```
 
 You can also use the fontTools subsetter to drop hints, remove unwanted layout features, etc.
@@ -270,7 +270,7 @@ Read ``fontmake --help`` for more options.
 Once our font is looking good we might want to render text with it. A full text rendering stack is typically a collection of components. We'll look primarily at the open options:
 
 1.  Shaping: given a sequence of character codes, figure out what gids should be drawn at what positions
-    *  The leading open tool for shaping is HarfBuzz ([code](https://github.com/harfbuzz/harfbuzz), [documentation](harfbuzz.github.io)
+    *  The leading open tool for shaping is HarfBuzz ([code](https://github.com/harfbuzz/harfbuzz), [documentation](harfbuzz.github.io))
     *  HarfBuzz [definition](https://harfbuzz.github.io/what-is-harfbuzz.html#what-is-text-shaping) of shaping
     *  If this is your first encounter with shaping beware, it's WAY more complicated than it might sound
     *  [What HarfBuzz doesn't do](https://harfbuzz.github.io/what-harfbuzz-doesnt-do.html)
@@ -317,7 +317,7 @@ Hopefully this illustrates that hb-shape runs on a single run of characters in a
 ```shell
 harfbuzz/util/hb-view fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC" \
                       --output-file=/tmp/roboto-abc.png
-display /tmp/roboto-abc.png
+# Open /tmp/roboto-abc.png in your viewer of choice
 ```
 
 ## Web Serving
@@ -439,7 +439,7 @@ Start it similar to `python3 font_server.py`. Try urls like http://localhost:808
 </html>
 ```
 
-Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato. If you look in browser dev tools you should see the font downloads in ttf format.
+Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato. If you look in browser dev tools (in Chrome: right-click, inspect, choose the Network tab) you should see the font downloads in ttf format.
 
 Congratulations, you have implemented your own version of Google Fonts!
 
