@@ -458,7 +458,7 @@ git clone --recursive https://github.com/google/woff2.git
 (cd woff2 && make clean all)
 
 # warning: SLOW; we "pay" now to make our users downloads faster
-# If you are just playing maybe do a subset of the files
+# If you are just playing maybe do a subset of the files, perhaps -name 'Noto*.[ot]tf'
 time find byogf/fonts -name '*.[ot]tf' -execdir ./woff2/woff2_compress {} \;
 ```
 
