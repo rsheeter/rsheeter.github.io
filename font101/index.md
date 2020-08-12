@@ -439,7 +439,11 @@ Start it similar to `python3 font_server.py`. Try urls like http://localhost:808
 </html>
 ```
 
-Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato. If you look in browser dev tools (in Chrome: right-click, inspect, choose the Network tab) you should see the font downloads in ttf format.
+Load by requesting http://localhost:8080/demo.html in your browser. You should see text in Lobster and Lato, similar to:
+
+![Text Demo](./lobster_lato.png)
+
+If you look in browser dev tools (in Chrome: right-click, inspect, choose the Network tab) you should see the font downloads in ttf format.
 
 Congratulations, you have implemented your own version of Google Fonts!
 
