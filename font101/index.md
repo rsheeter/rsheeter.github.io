@@ -52,16 +52,16 @@ The examples assume a clone of `https://github.com/google/fonts` exists in `./fo
 Let's try it out with a Google Font:
 
 ```shell
-ttx fonts/apache/roboto/Roboto-Regular.ttf
-# open and browse around fonts/apache/roboto/Roboto-Regular.ttx
+ttx fonts/ofl/lato/Lato-Regular.ttf
+# open and browse around fonts/ofl/lato/Lato-Regular.ttx
 # If we made some changes and wanted to generate an updated font binary:
-ttx -o /tmp/MyRoboto.ttf fonts/apache/roboto/Roboto-Regular.ttx
+ttx -o /tmp/MyLato.ttf fonts/ofl/lato/Lato-Regular.ttx
 ```
 
-Sometimes we just want to glance at a single table. For example, let's dump the ['name'](https://docs.microsoft.com/en-us/typography/opentype/spec/name) table for Roboto:
+Sometimes we just want to glance at a single table. For example, let's dump the ['name'](https://docs.microsoft.com/en-us/typography/opentype/spec/name) table for Lato:
 
 ```shell
-ttx -o - -t name fonts/apache/roboto/Roboto-Regular.ttf
+ttx -o - -t name fonts/ofl/lato/Lato-Regular.ttf
 ```
 
 To see what axes and named instances a variable font supports we could dump ['fvar'](https://docs.microsoft.com/en-us/typography/opentype/spec/fvar):
@@ -75,24 +75,24 @@ See also FontTools explanation of TTX [here](https://github.com/fonttools/fontto
 ### TTFont
 
 [TTFont](https://github.com/fonttools/fonttools/blob/master/Lib/fontTools/ttLib/ttFont.py) is a Python class that can 
-read/write OpenType font files. For example, let's suppose we decided `Roboto-Regular.ttf` had the wrong metadata for weight and we want to fix [usWeightClass](https://docs.microsoft.com/en-us/typography/opentype/spec/os2#usweightclass) programmatically:
+read/write OpenType font files. For example, let's suppose we decided `Lato-Regular.ttf` had the wrong metadata for weight and we want to fix [usWeightClass](https://docs.microsoft.com/en-us/typography/opentype/spec/os2#usweightclass) programmatically:
 
 ```shell
 # clone https://github.com/google/fonts, assumed to be in ./fonts for this example
 python
 >>> from fontTools import ttLib
->>> font = ttLib.TTFont('fonts/apache/roboto/Roboto-Regular.ttf')
+>>> font = ttLib.TTFont('fonts/ofl/lato/Lato-Regular.ttf')
 >>> font['OS/2'].usWeightClass
 400
 >>> font['OS/2'].usWeightClass = 500
->>> font.save('/tmp/Roboto-Modified.ttf')
+>>> font.save('/tmp/Lato-Modified.ttf')
 # Ctrl+D to exit python repl
 ```
 
 We could confirm our edit with TTX:
 
 ```shell
-ttx -q -o - -t "OS/2" /tmp/Roboto-Modified.ttf | grep usWeight
+ttx -q -o - -t "OS/2" /tmp/Lato-Modified.ttf | grep usWeight
     <usWeightClass value="500"/>
 ```
 
@@ -115,11 +115,11 @@ Let's suppose we want to cut a cyrillic block out of Roboto, matching the unicod
 }
 ```
 
-We'll start from `fonts/apache/roboto/Roboto-Regular.ttf`, which supports many scripts, and cut out everything but cyrillic:
+We'll start from `fonts/ofl/roboto/static/Roboto-Regular.ttf`, which supports many scripts, and cut out everything but cyrillic:
 
 ```shell
 pyftsubset --help
-pyftsubset fonts/apache/roboto/Roboto-Regular.ttf \
+pyftsubset fonts/ofl/roboto/static/Roboto-Regular.ttf \
   --unicodes="U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116" \
   --output-file=/tmp/Roboto-Regular-Cyrillic.ttf
 ```
@@ -129,7 +129,7 @@ The subsetter can also be used as a library:
 ```python
 from fontTools import subset, ttLib
 
-font = ttLib.TTFont('fonts/apache/roboto/Roboto-Regular.ttf')
+font = ttLib.TTFont('fonts/ofl/roboto/static/Roboto-Regular.ttf')
 
 subset_opts = subset.Options()
 subsetter = subset.Subsetter(options=subset_opts)
@@ -169,7 +169,7 @@ This is handled by the ['cmap'](https://docs.microsoft.com/en-us/typography/open
 codes (Unicode or otherwise) to gids. Let's look at an example by subsetting Roboto down to ABC using [pyftsubset](#pyftsubset):
 
 ```shell
-pyftsubset fonts/apache/roboto/Roboto-Regular.ttf \
+pyftsubset fonts/ofl/roboto/static/Roboto-Regular.ttf \
   --text="ABC" \
   --output-file=/tmp/Roboto-Regular-ABC.ttf
 ```
@@ -296,14 +296,14 @@ Let's shape some text using the HarfBuzz
 
 ```shell
 harfbuzz/util/hb-shape --help
-harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC"
+harfbuzz/util/hb-shape fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC"
 [gid37=0+1336|gid38=1+1275|gid39=2+1333]
 
 # ...What?
 harfbuzz/util/hb-shape --help-output-syntax
 
 # OK, I just want gid and advance
-harfbuzz/util/hb-shape fonts/apache/roboto/Roboto-Regular.ttf "ABC" \
+harfbuzz/util/hb-shape fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC" \
                        --no-glyph-names --no-clusters
 [37+1336|38+1275|39+1333]
 ```
@@ -315,7 +315,7 @@ Hopefully this illustrates that hb-shape runs on a single run of characters in a
 [hb-view](https://harfbuzz.github.io/utilities.html#utilities-command-line-hbview) lets you shape and render a string. For example:
 
 ```shell
-harfbuzz/util/hb-view fonts/apache/roboto/Roboto-Regular.ttf "ABC" \
+harfbuzz/util/hb-view fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC" \
                       --output-file=/tmp/roboto-abc.png
 display /tmp/roboto-abc.png
 ```
