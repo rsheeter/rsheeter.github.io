@@ -1,8 +1,8 @@
-**Tl;dr**
+## Tl;dr
 
 The Open Font Format (OFF) is limited to 65k glyphs. Raise the limit to billions by supporting use of uint32 in various places that currently use uint16 (ex uint16 numGlyphs in maxp).
 
-**Why**
+## Why
 
 The 65k limit is painful in several current and near-future scenarios:
 
