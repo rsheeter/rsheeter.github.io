@@ -810,7 +810,7 @@
     }
   },
   "29": {
-    "name": "Android10",
+    "name": "Android 10 (Q)",
     "version": "10",
     "fonts": {
       "num_files": 252,
@@ -865,7 +865,7 @@
     }
   },
   "30": {
-    "name": "Android11",
+    "name": "Android 11 (R)",
     "version": "11",
     "fonts": {
       "num_files": 257,
@@ -920,6 +920,81 @@
           "emoji_level": 13.0,
           "supported": 117,
           "total": 117
+        },
+        {
+          "emoji_level": 13.1,
+          "supported": 0,
+          "total": 217
+        }
+      ]
+    }
+  },
+  "31": {
+    "name": "Android 12 (S)",
+    "version": "12",
+    "fonts": {
+      "num_files": 1,
+      "size_MB": 9.2084465027,
+      "delta_size_MB": -64.8580665588
+    },
+    "emoji": {
+      "delta": 217.0,
+      "supported": 3522.0,
+      "by_level": [
+        {
+          "emoji_level": 1.0,
+          "supported": 1264,
+          "total": 1264
+        },
+        {
+          "emoji_level": 2.0,
+          "supported": 343,
+          "total": 343
+        },
+        {
+          "emoji_level": 3.0,
+          "supported": 179,
+          "total": 179
+        },
+        {
+          "emoji_level": 4.0,
+          "supported": 608,
+          "total": 608
+        },
+        {
+          "emoji_level": 5.0,
+          "supported": 239,
+          "total": 239
+        },
+        {
+          "emoji_level": 11.0,
+          "supported": 157,
+          "total": 157
+        },
+        {
+          "emoji_level": 12.0,
+          "supported": 230,
+          "total": 230
+        },
+        {
+          "emoji_level": 12.1,
+          "supported": 168,
+          "total": 168
+        },
+        {
+          "emoji_level": 13.0,
+          "supported": 117,
+          "total": 117
+        },
+        {
+          "emoji_level": 13.1,
+          "supported": 217,
+          "total": 217
+        },
+        {
+          "emoji_level": 14.0,
+          "supported": 0,
+          "total": 107
         }
       ]
     }
