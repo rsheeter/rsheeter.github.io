@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<script>
+	const t0 = performance.now();
+	</script>
+
+	<script src="font-kit.js"></script>
+	<style id="emoji_style"></style>
+	<style>
+	#emoji_picker > * {
+		font-size:  4em;
+	}
+	#emoji {
+	  font-family: "Noto Color Emoji";
+	  font-size: 16em;
+	  font-palette: --palette;
+	}
+	</style>
+	<style id="palette_overrides"></style>
+</head>
+<body>
+	<!--
+
+	https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas#a_color_picker
+
+	https://github.com/opentypejs/opentype.js/issues/374 suggests no support for COLRv1
+		https://github.com/opentypejs/opentype.js/pull/490 adds COLRv0 and CPAL
+		Won't even load CPAL because it doesn't speak COLRv1 :( Hacked a local opentypejs for now.
+
+	-->
+
+	<div id="emoji_picker">
+		<span onclick="updateEmojiSelection('🦆');">🦆</span>
+		<span onclick="updateEmojiSelection('🫠');">🫠</span>
+		<span onclick="updateEmojiSelection('🐐');">🐐</span>
+		<span onclick="updateEmojiSelection('🥷');">🥷</span>		
+	</div>
+	<div id="emoji">🦆</div>
+	<div id="pickers"></div>
+	<br>
+	<pre>NOTE: color changing only works in Chrome 101.0.4950.2+, as of 4/12/2022 you probably want Canary</pre>
+	<script>
+	var originalPalette = [];
+	var palette = [];
+
+	function colorEqual(c1, c2) {
+		return c1.every((c, i) => c == c2[i]);
+	}
+
+	function computeOverrides() {
+		return palette
+			.map((c, i) => `${i} rgba(${c[0]}, ${c[1]}, ${c[2]}, ${c[3]})`)
+			.filter((s, i) => !colorEqual(palette[i], originalPalette[i]))
+			.join(", ");
+	}
+
+	function updatePalette(overrideColors) {
+		const style = document.getElementById("palette_overrides");
+		style.innerHTML = `
+		@font-palette-values --palette {
+			font-family: "Noto Color Emoji";
+			base-palette: 0;
+			override-colors: ${overrideColors};
+		}
+		`;
+		window.location.hash = encodeURIComponent(overrideColors);
+	}
+
+	function updatePaletteEntry(paletteIndex, rgb_color) {
+		[0, 1, 2].forEach(i => {
+			palette[paletteIndex][i] = parseInt(rgb_color.substring(i * 2, i * 2 + 2), 16);
+		});
+		updatePalette(computeOverrides());
+	}
+
+	async function updateEmojiSelection(emoji) {
+		// my kingdom for predictable font urls?
+		const css_response = await fetch('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&text=' + encodeURIComponent(emoji));
+		const css_text = await css_response.text();
+
+		document.getElementById('emoji_style').innerHTML = css_text;
+		document.getElementById('emoji').innerHTML = emoji;
+
+		const font_url = css_text.split("\n").filter(e => e.indexOf("src:") != -1)[0].match(/src:\s+url\(([^)]+)\)/)[1];
+		const font_binary = await (await fetch(font_url)).arrayBuffer();
+		const font = fontkit.create(new Buffer(font_binary));
+
+		// update globals with palette, for now always the first palette
+		originalPalette = font.CPAL.colorRecords.slice(
+			font.CPAL.colorRecordIndices[0],
+			font.CPAL.colorRecordIndices[0] + font.CPAL.numPaletteEntries
+		).map(e => [e.red, e.green, e.blue, e.alpha]);
+		palette = [];
+		for (color of originalPalette) {
+			palette.push([...color]);  // copy so we can modify freely
+		}
+		updatePalette(window.location.hash.substring(1));
+
+		pickers = document.getElementById("pickers");
+    while (pickers.firstChild) {
+        pickers.removeChild(pickers.firstChild);
+    }
+		palette.forEach((color, i) => {
+			picker = document.createElement("input");
+			picker.type = "color";
+			// slice away alpha, color picker does not support
+			picker.value = "#" + color.slice(0, 3).map(e => e.toString(16)).map(e => e.length == 1 ? "0" + e : e).join("");
+			pickers.appendChild(picker);
+
+			picker.addEventListener('input', function(e) { updatePaletteEntry(i, e.target.value.substring(1)); })
+		});
+	}
+
+	updateEmojiSelection("🦆");
+
+
+	</script>
+</body>
+</html>
