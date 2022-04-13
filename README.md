@@ -9,6 +9,7 @@ Font engineering notes
 Demos
 
 * [incxfer demo](/incxfer_demo)
+* [COLRv1 recoloring demo](/recolor)
 
 References
 
