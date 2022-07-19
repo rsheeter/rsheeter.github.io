@@ -270,7 +270,7 @@ Read ``fontmake --help`` for more options.
 Once our font is looking good we might want to render text with it. A full text rendering stack is typically a collection of components. We'll look primarily at the open options:
 
 1.  Shaping: given a sequence of character codes, figure out what gids should be drawn at what positions
-    *  The leading open tool for shaping is HarfBuzz ([code](https://github.com/harfbuzz/harfbuzz), [documentation](harfbuzz.github.io))
+    *  The leading open tool for shaping is HarfBuzz ([code](https://github.com/harfbuzz/harfbuzz), [documentation](https://harfbuzz.github.io))
     *  HarfBuzz [definition](https://harfbuzz.github.io/what-is-harfbuzz.html#what-is-text-shaping) of shaping
     *  If this is your first encounter with shaping beware, it's WAY more complicated than it might sound
     *  [What HarfBuzz doesn't do](https://harfbuzz.github.io/what-harfbuzz-doesnt-do.html)
