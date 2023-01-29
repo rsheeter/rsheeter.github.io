@@ -15,3 +15,4 @@ References
 
 * [The Math Behind Font Rasterization](https://youtu.be/LaYPoMPRSlk)
 * [Text layout is a loose hierarchy of segmentation](https://raphlinus.github.io/text/2020/10/26/text-layout.html)
+
