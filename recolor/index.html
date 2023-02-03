@@ -18,6 +18,11 @@
 	  font-family: "Noto Color Emoji";
 	  font-size: 16em;
 	  font-palette: --palette;
+	  display: inline-block;
+	}
+	#canvas {
+		font-family: "Noto Color Emoji";
+		display: inline-block;
 	}
 	</style>
 	<style id="palette_overrides"></style>
@@ -39,7 +44,10 @@
 		<span onclick="updateEmojiSelection('🐐');">🐐</span>
 		<span onclick="updateEmojiSelection('🥷');">🥷</span>		
 	</div>
-	<div id="emoji">🦆</div>
+	<div style="display: flex;">
+		<div id="emoji">🦆</div>
+		<canvas id="canvas"></canvas>
+	</div>
 	<div id="pickers"></div>
 	<br>
 	<pre>NOTE: color changing only works in Chrome 101.0.4950.2+, as of 4/12/2022 you probably want Canary</pre>
@@ -113,8 +121,34 @@
 
 			picker.addEventListener('input', function(e) { updatePaletteEntry(i, e.target.value.substring(1)); })
 		});
+
+		const t0 = performance.now();
+		load_promises = []
+		for (var fontFace of document.fonts.values()) {
+			load_promises.push(fontFace.load());
+		}
+		await Promise.all(load_promises);
+		console.log("Fonts ready.", performance.now() - t0, "ms");
+
+		var canvas = document.getElementById('canvas');
+		
+		var ctx = canvas.getContext('2d');
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		emWidth = 8;
+		ctx.font = `${emWidth}em 'Noto Color Emoji'`;
+		ctx.textAlign = "center";
+		textMetrics = ctx.measureText(emoji);
+		emWidth = Math.min(canvas.width, canvas.height) / textMetrics.width * emWidth;
+		ctx.font = `${emWidth}em 'Noto Color Emoji'`;
+		ctx.textBaseline = 'middle'; 
+		ctx.textAlign = 'center'; 
+
+		ctx.fillText(emoji, canvas.width / 2, canvas.height / 2);
+
 	}
 
+	canvas.width = document.getElementById('emoji').offsetWidth;
+	canvas.height = document.getElementById('emoji').offsetHeight;
 	updateEmojiSelection("🦆");
 
 

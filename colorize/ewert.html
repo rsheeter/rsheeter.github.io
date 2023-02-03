@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link href="https://fonts.googleapis.com/css2?family=Ewert&display=swap" rel="stylesheet">
+<style>
+	@font-face {
+		font-family: "Ewert Spice";
+		src: url("./Ewert-Spice.ttf");
+	}
+
+  sample {
+	  font-family: "Ewert Spice";
+	  font-size: 8em;
+    font-palette: --palette;
+  }
+
+  select{
+  	font-family: Ewert;
+  	font-size: 6em;
+  }
+</style>
+
+<style id="palette_overrides"></style>
+
+<div>
+	<select name="palette" id="palette" >
+	  <option value="0">palette 0</option>
+	  <option value="1">palette 1</option>
+	  <option value="2">palette 2</option>
+	  <option value="3">palette 3</option>
+	  <option value="4">palette 4</option>
+	  <option value="5">palette 5</option>
+	  <option value="6">palette 6</option>
+	  <option value="7">palette 7</option>
+	</select>	
+</div>
+<div>
+	It can have gradients too, I just haven't scripted that yet :)
+</div>
+
+<sample>
+The quick brown fox jumps over the lazy dog
+<br/>
+0123456789
+</sample>
+
+<script>
+
+function update_palette(e) {
+    let base_palette = document.getElementById("palette").value;
+    let style = document.getElementById("palette_overrides");
+    style.innerHTML = `
+                       @font-palette-values --palette {
+                       				font-family: "Ewert Spice";
+                              base-palette: ${base_palette};
+                       }
+                       `;
+}
+
+document.getElementById("palette")
+  .addEventListener("change", update_palette);
+
+update_palette();
+</script>

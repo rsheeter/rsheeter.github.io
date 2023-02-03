@@ -9,7 +9,8 @@ Font engineering notes
 Demos
 
 * [incxfer demo](/incxfer_demo)
-* [COLRv1 recoloring demo](/recolor)
+* [COLRv1 recoloring demo](/recolor) - pick new colors for a COLRv1 asset
+* [Colorized fonts](/colorize)
 
 References
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+<style>
+	@font-face {
+		font-family: "Monoton Spice";
+		src: url("./Monoton-Spice.ttf");
+	}
+
+   @font-palette-values --palette0 { font-family: "Monoton Spice"; base-palette: 0; }
+   @font-palette-values --palette1 { font-family: "Monoton Spice"; base-palette: 1; }
+   @font-palette-values --palette2 { font-family: "Akronim Spice"; base-palette: 2; }
+
+  sample {
+	  font-family: "Monoton Spice";
+	  font-size: 6em;
+   	display: block; 
+  }
+
+	sample:nth-of-type(1) { font-family: "Monoton" }
+  sample:nth-of-type(2) { font-palette: --palette0; }
+  sample:nth-of-type(3) { font-palette: --palette1; }
+</style>
+
+<style id="palette_overrides"></style>
+
+<sample>The quick brown fox jumps over the lazy dog</sample>
+<sample>The quick brown fox jumps over the lazy dog</sample>
+<sample>The quick brown fox jumps over the lazy dog</sample>
