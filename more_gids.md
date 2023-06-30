@@ -12,7 +12,6 @@ The 65k limit is painful in several current and near-future scenarios:
    1. Pan-Unicode fonts are limited by the inability for layout features to span files
 1. Progressive Font Enrichment (https://www.w3.org/Fonts/WG/webfonts-2018.html) offers a future where a pan-unicode web font can be efficiently delivered — if we could create one
 1. COLR fonts use discrete glyphs for layers, potentially exhausting the glyph limit
-   1. This is particularly likely if Unicode substantially expands the range of glyphs with skin tone
 
 Google Fonts is eager to see the font specification updated to resolve these issues. We are eager to collaborate on on spec updates and to collaborate on updating open source font creation, manipulation, and rendering libraries and, where appropriate, open source fonts to the new spec.
 
