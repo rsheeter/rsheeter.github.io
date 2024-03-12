@@ -6,11 +6,11 @@ Learn to scan Google Fonts for fonts that support a given codepoint.
 
 It is assumed that all code is cloned into the same directory and that [`cargo new`](https://doc.rust-lang.org/cargo/commands/cargo-new.html) is run in that directory.
 
-At times only partial commandline output is gien to reduce noise.
+At times only partial commandline output is given to reduce noise.
 
 ## Install Rust
 
-See https://www.rust-lang.org/tools/install
+See [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install)
 
 If you haven't written Rust **at all** so far take the time to complete at least one of:
 
@@ -26,7 +26,7 @@ is a good default if you don't already have a favorite.
 
 ## Get some fonts
 
-Clone https://github.com/google/fonts
+Clone [https://github.com/google/fonts](https://github.com/google/fonts)
 
 ## Find all the fonts that appear to support the melting face
 
@@ -53,9 +53,11 @@ Hello, world!
 [Cargo.toml](https://doc.rust-lang.org/cargo/reference/manifest.html) is your _manifest_. It configures your package name,
 dependencies, license, and more.
 
-### Go find some font files
+### Error handling
 
 This isn't a serious program. When you encounter a `Result` or `Option` feel free to call use `unwrap` or `expect`. This will cause a [panic](https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html) if it fails. That's fine for exploration, it'll make things go much faster.
+
+### Go find some font files
 
 First off, scan your copy of Google Fonts (cloned above) to find font files. Let's say those are files names `*.ttf` and `*.otf`. [glob](https://crates.io/crates/glob) is good at this sort of thing, let's add a dependency! 
 
@@ -89,7 +91,7 @@ Stuck? See [1-glob.rs](./1-glob.rs).
 
 ### Skrifa-time!
 
-https://unicode.org/Public/emoji/15.1/emoji-test.txt says 0x1FAE0 is melting face and that's just what we need. But ... which fonts
+[https://unicode.org/Public/emoji/15.1/emoji-test.txt](https://unicode.org/Public/emoji/15.1/emoji-test.txt) says 0x1FAE0 is melting face and that's just what we need. But ... which fonts
 support it?!
 
 Let's use [Skrifa](https://crates.io/crates/skrifa) to query our fonts [cmap](https://learn.microsoft.com/en-us/typography/opentype/spec/cmap). Add a dependency!
