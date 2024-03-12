@@ -66,15 +66,15 @@ A few tips and reminders:
     * I have gathered examples by Android API level [here](https://github.com/rsheeter/android_fonts/tree/master/api_level)
     * Read the comment on `fonts.xml` carefully, the prioritization of fonts (first match by lang, then by order) is critical.
 1.  ICU provides us `BreakIterator`, making it easy to loop over grapheme clusters in our input text
-    * [ICU4J](https://mvnrepository.com/artifact/com.ibm.icu/icu4j) and [PyICU](https://pypi.org/project/PyICU/) are available from major package managers.
+    * [unicode_segmentation](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/) provides grapheme, word, and sentence breaking for Rust
+    * [ICU4J](https://mvnrepository.com/artifact/com.ibm.icu/icu4j) for Java and [PyICU](https://pypi.org/project/PyICU/) are available as well
     ```shell
     # PyICU can be grumpy about installation; this worked for me on Mac using Homebrew in a py3 venv
     brew install icu4c
     export PATH="/usr/local/opt/icu4c/bin:$PATH"
     pip install pyicu
     ```
-1.  FontTools gives us tools to extract the codepoints supported from each font
-    * If you don't want to work in Python it may make life easier to extract the codepoints from each font using Python and write it down in a format that works well for your language of choice
+1.  [Skrifa](https://docs.rs/skrifa/latest/skrifa/) can give you the codepoints through [charmap](https://docs.rs/skrifa/latest/skrifa/trait.MetadataProvider.html#method.charmap)
 1.  Merge adjacent clusters using the same font to form runs
 
 That should be enough to implement what we wanted at the beginning:
@@ -84,4 +84,5 @@ Input:  (font configuration, language, codepoint sequence)
 Output: sequence of (font, codepoint sequence)
 ```
 
+Note that this is over-simplified but perhaps enough to give some feel for the problem.
 

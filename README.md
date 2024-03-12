@@ -2,8 +2,12 @@
 
 Font engineering notes
 
-* [font 101](/font101)
-* [font 102](/font102)
+* [font 101](/font101) The Basics
+   * A brief introduction to the basic concepts and tools you might need if you are a software engineer who wants to Do Things to fonts. Primarily aimed at people working on Google Fonts.
+   * Introduces the majority of the core tools prior to our [Oxidize](https://github.com/googlefonts/oxidize) effort
+* [font 102](/font102) Font Fallback. Left at 102 for link stability, it's probably best to skip to 103.
+   * Introduces the idea of font fallback and graphemes
+* [font 103](/font103) Introduction to accessing fonts in Rust with [Skrifa](https://docs.rs/skrifa/latest/skrifa)
 * [android fonts](/android_fonts)
 
 Demos
