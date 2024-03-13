@@ -224,7 +224,7 @@ You should see something like:
 
 [Fontmake](https://github.com/googlefonts/) is a command-line tool that compiles font
 sources to binary OpenType fonts. It supports sources in either
-[Glyphs.app](https://glyphsapp.com) format or [UFO](https://unifiedfontobject.com) format
+[Glyphs.app](https://glyphsapp.com) format or [UFO](https://unifiedfontobject.org) format
 (which is the native format used by [Robofont](https://robofont.com) app and can be
 imported/exported in most font editors).
 
