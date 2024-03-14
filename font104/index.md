@@ -140,4 +140,61 @@ Note that Location is in [normalized units](https://github.com/googlefonts/fontc
 
 Stuck? See [4-split.rs](./4-split.rs).
 
-# TODO: finish me :)
+### Find the Glyph ID of our icon
+
+Oh wait, we haven't actually identified a glyph! Google-style icon fonts have two ways to access a glyph:
+
+1. By ligature, e.g. "alarm" will resolve to the glyph for the alarm icon
+1. By codepoint, each unique icon name is assigned a single [private-use area](https://en.wikipedia.org/wiki/Private_Use_Areas) codepoint
+
+Resolving ligatures is slightly fiddly so lets go with codepoint for now. Add a commandline argument to specify the codepoint. Since
+things like https://fonts.corp.google.com/icons tend to give the codepoint in hex you might want to support inputs like 0xe855 (the codepoint for alarm).
+
+Once you've got your codepoint resolve it to a glyph identifier using the charactermap, just like in [font103](../font103).
+
+Stuck? See [5-gid.rs](./5-gid.rs).
+
+### Draw an svg
+
+Before we make a Vector Drawable let's draw an SVG so we can look at it in a browser and confirm the expected result.
+
+In a stunning stroke of luck Skrifa has an [example](https://docs.rs/skrifa/latest/skrifa/outline/index.html) of drawing an svg path. You can implement your own pen or use [`BezPathPen`](https://docs.rs/write-fonts/latest/write_fonts/pens/struct.BezPathPen.html) (`cargo add write-fonts`) to generate a [`BezPath`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html) and call [`BezPath::to_svg`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html#method.to_svg) to get the path.
+
+To display an svg we'll need to wrap some boilerplate around our path. Notably, we'll have to specify the rectangular region of svg space we want to look at via the [viewBox](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox) attribute. Conveniently Google style icon fonts draw into a square space starting at 0,0 and extending to (upem, upem). You can get upem from the [head](https://learn.microsoft.com/en-us/typography/opentype/spec/head) table by calling [`.head()`](https://docs.rs/read-fonts/latest/read_fonts/trait.TableProvider.html) on your `FontRef`.
+
+Write a string to stdout similar to:
+
+```xml
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+   <path d="M ... Z"/>
+</svg>
+```
+
+Try out your svg, a browser can render it. If all went well you should see your icon ... but upside-down:
+
+<img width="128" src="./upside_down.svg" />
+
+Blast! Turns out fonts are y-up and svg is y-down. Luckily kurbo (`cargo add kurbo`) has an [`Affine`](https://docs.rs/kurbo/latest/kurbo/struct.Affine.html) implementation and there is a [`BezPath::apply_affine`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html#method.apply_affine) method. [`Affine::FLIP_Y`](https://docs.rs/kurbo/latest/kurbo/struct.Affine.html#associatedconstant.FLIP_Y) will correct our clock but ... then the content with stretch from (0, -upem) to (upem, 0). To fix that do one of:
+
+1. Write the viewBox for where the content is now
+1. Move the content back up using [`Affine::then_translate`](https://docs.rs/kurbo/latest/kurbo/struct.Affine.html#method.then_translate)
+   * Or building the appropriate Affine some other way
+
+You should now have an svg of your icon!
+
+Hint:
+
+   * If you get an error "perhaps two different versions of crate `kurbo` are being used?" run `cargo tree`
+      * Probably your `Cargo.toml` declares one version of kurbo and write-fonts depends on another
+      * If so, update your Cargo.toml to declare the same version as write-fonts
+   * If you have never run into an affine (aka transform) before 3blue1brown's [Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) is highly recommended, particularly the first couple chapters
+
+Stuck? See [6-svg.rs](./6-svg.rs).
+
+### Draw a vector drawable
+
+It's just a slightly different xml wrapper. See [Vector images](https://developer.android.com/develop/ui/views/graphics/vector-drawable-resources) in the Android documentation.
+
+Write one and try it out in Android Studio. Put it in `app/src/main/res/drawable` with the extension `.xml` and use it in an Android application.
+
+

@@ -12,6 +12,10 @@ pub enum VectorDrawableError {
     FontRef(ReadError),
     #[error("Unintelligible position")]
     UnableToParsePosition,
+    #[error("Unable to parse codepoint")]
+    UnableToParseCodepoint,
+    #[error("No mapping for codepoint")]
+    UnableToMapCodepointToGlyphId,
 }
 
 /// A program to generate vector drawables from glyphs in a font
@@ -25,6 +29,10 @@ struct Args {
     /// The font file to process
     #[arg(short, long)]
     file: String,
+
+    /// The codepoint for the icon, e.g. 0x855.
+    #[arg(short, long)]
+    icon: String,
 }
 
 fn parse_location(raw: &str) -> Result<Vec<(&str, f32)>, VectorDrawableError> {
@@ -50,11 +58,23 @@ fn main() -> Result<(), VectorDrawableError> {
         .map_err(VectorDrawableError::ReadFont)?;
     let font = FontRef::new(&raw_font)
         .map_err(VectorDrawableError::FontRef)?;
-    
+
+    let codepoint = if args.icon.starts_with("0x") {
+        u32::from_str_radix(&args.icon[2..], 16)
+            .map_err(|_| VectorDrawableError::UnableToParseCodepoint)?
+    } else {
+        // TODO: support ligature access
+        return Err(VectorDrawableError::UnableToParseCodepoint);
+    };
+    let gid = font.charmap().map(codepoint)
+        .ok_or(VectorDrawableError::UnableToMapCodepointToGlyphId)?;
+
     // rebinding (reusing variable names) is much more common in Rust than most other languages
     let location = parse_location(&args.pos)?;
     let location = font.axes().location(location);
-    println!("{location:?}");    
+    println!("{location:?}");
+
+    println!("TODO: draw {gid}");
 
     Ok(())
 }

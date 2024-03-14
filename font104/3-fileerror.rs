@@ -5,8 +5,8 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum VectorDrawableError {
-    #[error("Unable to read font")]
-    ReadFont(#[from] io::Error)
+    #[error("Unable to read font {0}")]
+    ReadFont(io::Error)
 }
 
 /// A program to generate vector drawables from glyphs in a font
