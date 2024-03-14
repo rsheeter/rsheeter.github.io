@@ -124,7 +124,7 @@ Now it gets a little tricky. We need to load the bytes as a [`FontRef`](https://
 To find out what codepoints are supported we need a [Charmap](https://docs.rs/skrifa/latest/skrifa/charmap/struct.Charmap.html). Those are obtained from the [MetadataProvider](https://docs.rs/skrifa/latest/skrifa/trait.MetadataProvider.html). But ... we've got a FontRef, where do we get a MetadataProvider?! Well, if you squint hard at [`FontRef`](https://docs.rs/skrifa/latest/skrifa/struct.FontRef.html) you should see two interesting clues:
 
 1. Under Trait Implementations it lists TableProvider
-1. Under Blank Implementations it lists MetadataProvider
+1. Under Blanket Implementations it lists MetadataProvider
 
 FontRef is a Table Provider and _all_ Table Providers are MetadataProviders. Traits are fun, why not read about [Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)? Oh right, we have an actual job to do!
 
