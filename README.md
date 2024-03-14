@@ -7,7 +7,14 @@ Font engineering notes
    * Introduces the majority of the core tools prior to our [Oxidize](https://github.com/googlefonts/oxidize) effort
 * [font 102](/font102) Font Fallback. Left at 102 for link stability, it's probably best to skip to 103.
    * Introduces the idea of font fallback and graphemes
-* [font 103](/font103) Introduction to accessing fonts in Rust with [Skrifa](https://docs.rs/skrifa/latest/skrifa)
+* [font 103](/font103)
+   * Introduction to accessing fonts in Rust with [Skrifa](https://docs.rs/skrifa/latest/skrifa)
+   * Find fonts that support a given codepoint
+* [font 104](/font104)
+   * Completion of 103 first is recommended
+   * Introduction to accessing fonts in Rust with [Skrifa](https://docs.rs/skrifa/latest/skrifa)
+   * Introduction to fiddling with curves in Rust with [kurbo](https://docs.rs/kurbo/latest/kurbo)   
+   * Generate an [Android Vector Drawable](https://developer.android.com/develop/ui/views/graphics/vector-drawable-resources) of an icon defined in a variable font
 * [android fonts](/android_fonts)
 
 Demos
