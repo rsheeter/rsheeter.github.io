@@ -109,7 +109,7 @@ Add a dependency on skrifa (`cargo add skrifa`).
 
 Create a [`FontRef`](https://docs.rs/skrifa/latest/skrifa/font/struct.FontRef.html), passing in your data as a u8 [slice](https://doc.rust-lang.org/reference/types/slice.html). `FontRef::new` returns a `Result` with a new error type. You'll have to add a variant to `VectorDrawableError` and use `map_err` again.
 
-Just to confirm it's working you could print the variable font axes by calling [`.axes()`](https://docs.rs/skrifa/latest/skrifa/trait.MetadataProvider.html#method.axes) on your [`FontRef`](https://docs.rs/skrifa/latest/skrifa/struct.FontRef.html) (it helpfully implements [`MetadataProvider`](https://docs.rs/skrifa/latest/skrifa/trait.MetadataProvider.html)). This will give you the axes and ranges declared in the [fvar](https://learn.microsoft.com/en-us/typography/opentype/spec/fvar) table is [user units](https://github.com/googlefonts/fontc/blob/main/resources/text/units.md).
+Just to confirm it's working you could print the variable font axes by calling [`.axes()`](https://docs.rs/skrifa/latest/skrifa/trait.MetadataProvider.html#method.axes) on your [`FontRef`](https://docs.rs/skrifa/latest/skrifa/struct.FontRef.html) (it helpfully implements [`MetadataProvider`](https://docs.rs/skrifa/latest/skrifa/trait.MetadataProvider.html)). This will give you the axes and ranges declared in the [fvar](https://learn.microsoft.com/en-us/typography/opentype/spec/fvar) table in [user units](https://github.com/googlefonts/fontc/blob/main/resources/text/units.md).
 
 ### Set the location in variation space
 
