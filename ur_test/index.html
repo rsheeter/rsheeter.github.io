@@ -2,6 +2,9 @@
 <html>
 <head>
 <style>
+/* CSS API copy */
+@import url(http://fonts.googleapis.com/css2?family=EB+Garamond);
+
 /* The whole font */
 @font-face {
 	font-family: 'EB Garamond Full';
@@ -12,21 +15,24 @@
 
 /* EBGaramond-A-comb-caron.ttf A, comb caron, precomposed A comb caron */
 @font-face {
-  font-family: 'EB Garamond';
+  font-family: 'EB Garamond Subset';
   src: url(./EBGaramond-A-comb-caron.ttf);
   unicode-range: U+0041,U+01cd,U+030c;
 }
 /* EBGaramond-AW.ttf AW, playing the role of latin */
 @font-face {
-  font-family: 'EB Garamond';
+  font-family: 'EB Garamond Subset';
   src: url(./EBGaramond-AW.ttf);
   unicode-range: U+0041,U+0057;
 }
 
-
-
-text {
+css_api {
 	font-family: "EB Garamond";
+	color: darkslateblue;
+}
+
+subset {
+	font-family: "EB Garamond Subset";
 	color: darkred;
 }
 
@@ -61,21 +67,33 @@ grid *:nth-of-type(3) {
 	<div style="font-size: 3em;">
 		<full>Sample in full font</full>
 		drawn on top of
-		<text>sample in subset font</text>
-
-		
+		<subset>sample in subset font</subset>
 	</div>
-
 	<grid>
-		<text>AW</text>
+		<subset>AW</subset>
 		<full>AW</full>
 		
-		<text>&#x0041;&#x030c;</text>
+		<subset>&#x0041;&#x030c;</subset>
 		<full>&#x0041;&#x030c;</full>
 		
-		<text>&#x01cd;</text>
+		<subset>&#x01cd;</subset>
 		<full>&#x01cd;</full>
+	</grid>
+
+	<div style="font-size: 3em;">
+		<full>Sample in full font</full>
+		drawn on top of
+		<css_api>sample in CSS API font</css_api>
+	</div>
+	<grid>
+		<css_api>AW</css_api>
+		<full>AW</full>
 		
+		<css_api>&#x0041;&#x030c;</css_api>
+		<full>&#x0041;&#x030c;</full>
+		
+		<css_api>&#x01cd;</css_api>
+		<full>&#x01cd;</full>
 	</grid>
 </body>
 </html>

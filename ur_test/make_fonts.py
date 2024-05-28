@@ -59,7 +59,7 @@ def main():
 		name = font["name"].getBestFamilyName()
 		print(f"/* {font_file.name} {desc} */")
 		print("@font-face {")
-		print(f"  font-family: 'EB Garamond';")
+		print(f"  font-family: 'EB Garamond Subset';")
 		print(f"  src: url(./{font_file.name});")
 		print(f"  unicode-range: {unicode_range};")
 		print("}")
