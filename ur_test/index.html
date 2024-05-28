@@ -8,13 +8,6 @@
 	src: url(./EBGaramond[wght].ttf);
 }
 
-/* EBGaramond-AW.ttf */
-@font-face {
-  font-family: 'EB Garamond';
-  src: url(./EBGaramond-AW.ttf);
-  unicode-range: U+0041,U+0057;
-}
-
 /* EBGaramond-A-comb-caron.ttf */
 @font-face {
   font-family: 'EB Garamond';
@@ -29,28 +22,64 @@
   unicode-range: U+01cd,U+01ce;
 }
 
+/* EBGaramond-AW.ttf. No combining marks. Akin to just "latin." */
+@font-face {
+  font-family: 'EB Garamond';
+  src: url(./EBGaramond-AW.ttf);
+  unicode-range: U+0041,U+0057;
+}
+
 text {
-	font-size: 4em;
 	font-family: "EB Garamond";
-	display: block;
+	color: darkred;
 }
 
 full {
-	font-size: 4em;
 	font-family: "EB Garamond Full";
-	display: block;
+	color: darkseagreen;
+}
+
+grid {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+grid * { 
+	grid-column: 1;
+	font-size: 4em;
+	opacity: 0.75;
+}
+
+grid *:nth-of-type(1) { 
+	grid-row: 1;
+}
+grid *:nth-of-type(2) { 
+	grid-row: 2;
+}
+grid *:nth-of-type(3) { 
+	grid-row: 3;
 }
 </style>
 </head>
 <body>
-	<h3>Subsets</h3>
-	<text>AW</text>
-	<text>&#x0041;&#x030c;</text>
-	<text>&#x01cd;&#x01ce;</text>
+	<div style="font-size: 3em;">
+		<full>Sample in full font</full>
+		drawn on top of
+		<text>sample in subset font</text>
 
-	<h3>Full font</h3>
-	<full>AW</full>
-	<full>&#x0041;&#x030c;</full>
-	<full>&#x01cd;&#x01ce;</full>
+		
+	</div>
+
+	<grid>
+		<text>AW</text>
+		<full>AW</full>
+		
+		<text>&#x0041;&#x030c;</text>
+		<full>&#x0041;&#x030c;</full>
+		
+		<text>&#x01cd;&#x01ce;</text>
+		<full>&#x01cd;&#x01ce;</full>
+		
+	</grid>
 </body>
 </html>
