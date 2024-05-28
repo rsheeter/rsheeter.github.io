@@ -16,4 +16,4 @@ $ hb-shape EBhb.ttf --unicodes=U+41,U+30c --ned
 [gid1|gid2@692,0]
 ```
 
-[Sample rendering](./)
+When rendered the caron sits off to the right rather than atop the A like a lovely inverted hat.
