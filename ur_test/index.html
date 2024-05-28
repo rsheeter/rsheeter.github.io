@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+@font-face {
+	font-family: 'EB Garamond Full';
+	src: url(./EBGaramond[wght].ttf);
+}
+
+/* EBGaramond-AW.ttf */
+@font-face {
+  font-family: 'EB Garamond';
+  src: url(./EBGaramond-AW.ttf);
+  unicode-range: U+0041,U+0057;
+}
+
+/* EBGaramond-A-comb-caron.ttf */
+@font-face {
+  font-family: 'EB Garamond';
+  src: url(./EBGaramond-A-comb-caron.ttf);
+  unicode-range: U+0041,U+030c;
+}
+
+/* EBGaramond-A-with-caron.ttf */
+@font-face {
+  font-family: 'EB Garamond';
+  src: url(./EBGaramond-A-with-caron.ttf);
+  unicode-range: U+01cd,U+01ce;
+}
+
+text {
+	font-size: 4em;
+	font-family: "EB Garamond";
+	display: block;
+}
+
+full {
+	font-size: 4em;
+	font-family: "EB Garamond Full";
+	display: block;
+}
+</style>
+</head>
+<body>
+	<h3>Subsets</h3>
+	<text>AW</text>
+	<text>&#x0041;&#x030c;</text>
+	<text>&#x01cd;&#x01ce;</text>
+
+	<h3>Full font</h3>
+	<full>AW</full>
+	<full>&#x0041;&#x030c;</full>
+	<full>&#x01cd;&#x01ce;</full>
+</body>
+</html>
