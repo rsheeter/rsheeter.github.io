@@ -116,11 +116,11 @@ Let's suppose we want to cut a cyrillic block out of Roboto, matching the unicod
 }
 ```
 
-We'll start from `fonts/ofl/roboto/static/Roboto-Regular.ttf`, which supports many scripts, and cut out everything but cyrillic:
+We'll start from `fonts/ofl/roboto/Roboto[wdth,wght].ttf`, which supports many scripts, and cut out everything but cyrillic:
 
 ```shell
 pyftsubset --help
-pyftsubset fonts/ofl/roboto/static/Roboto-Regular.ttf \
+pyftsubset "fonts/ofl/roboto/Roboto[wdth,wght].ttf" \
   --unicodes="U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116" \
   --output-file=/tmp/Roboto-Regular-Cyrillic.ttf
 ```
@@ -130,7 +130,7 @@ The subsetter can also be used as a library:
 ```shell
 python
 >>> from fontTools import subset, ttLib
->>> font = ttLib.TTFont('fonts/ofl/roboto/static/Roboto-Regular.ttf')
+>>> font = ttLib.TTFont("fonts/ofl/roboto/Roboto[wdth,wght].ttf')
 
 >>> subset_opts = subset.Options()
 >>> subsetter = subset.Subsetter(options=subset_opts)
@@ -170,7 +170,7 @@ This is handled by the ['cmap'](https://docs.microsoft.com/en-us/typography/open
 codes (Unicode or otherwise) to gids. Let's look at an example by subsetting Roboto down to ABC using [pyftsubset](#pyftsubset):
 
 ```shell
-pyftsubset fonts/ofl/roboto/static/Roboto-Regular.ttf \
+pyftsubset "fonts/ofl/roboto/Roboto[wdth,wght].ttf" \
   --text="ABC" \
   --output-file=/tmp/Roboto-Regular-ABC.ttf
 ```
@@ -297,14 +297,14 @@ Let's shape some text using the HarfBuzz
 
 ```shell
 harfbuzz/util/hb-shape --help
-harfbuzz/util/hb-shape fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC"
+harfbuzz/util/hb-shape "fonts/ofl/roboto/Roboto[wdth,wght].ttf" "ABC"
 [gid37=0+1336|gid38=1+1275|gid39=2+1333]
 
 # ...What?
 harfbuzz/util/hb-shape --help-output-syntax
 
 # OK, I just want gid and advance
-harfbuzz/util/hb-shape fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC" \
+harfbuzz/util/hb-shape "fonts/ofl/roboto/Roboto[wdth,wght].ttf" "ABC" \
                        --no-glyph-names --no-clusters
 [37+1336|38+1275|39+1333]
 ```
@@ -316,7 +316,7 @@ Hopefully this illustrates that hb-shape runs on a single run of characters in a
 [hb-view](https://harfbuzz.github.io/utilities.html#utilities-command-line-hbview) lets you shape and render a string. For example:
 
 ```shell
-harfbuzz/util/hb-view fonts/ofl/roboto/static/Roboto-Regular.ttf "ABC" \
+harfbuzz/util/hb-view "fonts/ofl/roboto/Roboto[wdth,wght].ttf" "ABC" \
                       --output-file=/tmp/roboto-abc.png
 # Open /tmp/roboto-abc.png in your viewer of choice
 ```
