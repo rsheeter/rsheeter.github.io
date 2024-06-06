@@ -4,6 +4,7 @@ A brief introduction to the basic concepts and tools you might need if you are
 a software engineer who wants to Do Things to fonts. Primarily aimed at people
 working on Google Fonts.
 
+1.  [Basic Typography Knowledge](https://fonts.google.com/knowledge), context for all the technology that follows. The [glossary](https://fonts.google.com/knowledge/glossary) is good.
 1.  [Basic Work Environment](#basic-work-environment)
 1.  [FontTools](#fonttools), a library for inspection and manipulation of OpenType fonts
     1.  [TTX](#ttx), a commandline tool to convert fonts to/from xml
