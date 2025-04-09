@@ -158,7 +158,15 @@ Stuck? See [5-gid.rs](./5-gid.rs).
 
 Before we make a Vector Drawable let's draw an SVG so we can look at it in a browser and confirm the expected result.
 
-In a stunning stroke of luck Skrifa has an [example](https://docs.rs/skrifa/latest/skrifa/outline/index.html) of drawing an svg path. You can implement your own pen or use [`BezPathPen`](https://docs.rs/write-fonts/latest/write_fonts/pens/struct.BezPathPen.html) (`cargo add write-fonts`) to generate a [`BezPath`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html) and call [`BezPath::to_svg`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html#method.to_svg) to get the path.
+In a stunning stroke of luck Skrifa has an [example](https://docs.rs/skrifa/latest/skrifa/outline/index.html) of drawing an svg path. Implement your own pen:
+
+1. Import [`OutlinePen`](https://docs.rs/skrifa/latest/skrifa/outline/trait.OutlinePen.html)
+1. Create a new struct that owns a [`BezPath`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html) (e.g. `struct BezPen(BezPath);`)
+1. Implement the OutlinePen trait for your struct
+   * Map the calls directly to BezPath, e.g. on `move_to` call [`BezPath.move_to`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html#method.move_to)
+
+You can then create your pen, draw into it, get the BezPath from it,
+and call [`BezPath::to_svg`](https://docs.rs/kurbo/latest/kurbo/struct.BezPath.html#method.to_svg) to get the path.
 
 To display an svg we'll need to wrap some boilerplate around our path. Notably, we'll have to specify the rectangular region of svg space we want to look at via the [viewBox](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox) attribute. Conveniently Google style icon fonts draw into a square space starting at 0,0 and extending to (upem, upem). You can get upem from the [head](https://learn.microsoft.com/en-us/typography/opentype/spec/head) table by calling [`.head()`](https://docs.rs/read-fonts/latest/read_fonts/trait.TableProvider.html) on your `FontRef`.
 
@@ -184,9 +192,6 @@ You should now have an svg of your icon!
 
 Hint:
 
-   * If you get an error "perhaps two different versions of crate `kurbo` are being used?" run `cargo tree`
-      * Probably your `Cargo.toml` declares one version of kurbo and write-fonts depends on another
-      * If so, update your Cargo.toml to declare the same version as write-fonts
    * If you have never run into an affine (aka transform) before 3blue1brown's [Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) is highly recommended, particularly the first couple chapters
 
 Stuck? See [6-svg.rs](./6-svg.rs).
